@@ -6,6 +6,9 @@ use App\Invoices;
 use App\Invoices_Details;
 use App\Invoices_Attachments;
 use App\Sections;
+use App\Notifications\AddInvoice;
+use App\User;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -94,6 +97,9 @@ class InvoicesController extends Controller
             $request->attachment->move(public_path('Attachments/' . $invoice_number), $file_name);
 
         }
+
+        $user = User::first();
+        Notification::send($user, new AddInvoice($InvoiceID));
 
         session()->flash('Add', 'تم اضافة الفاتورة بنجاح');
         return redirect('/invoices');

@@ -14,12 +14,9 @@
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
-<<<<<<< HEAD
-        "laravel/ui": "2.4"
-=======
         "laravel/ui": "2.4",
-      "ext-json": "*"
->>>>>>> b1db3c9 (Invoices Archive & Invoices Status Update)
+        "ext-json": "*"
+
     },
     "require-dev": {
         "facade/ignition": "^2.0",
