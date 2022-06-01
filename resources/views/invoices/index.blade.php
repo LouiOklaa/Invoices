@@ -138,6 +138,7 @@
                                             <a class="dropdown-item bg-primary text-white" href="#" data-toggle="modal" data-target="#delete_invoice" data-invoice_id="{{$one->id}}" >حذف الفاتورة</a>
                                             <a class="dropdown-item bg-primary text-white" href="{{ URL::route('status_show', [$one->id]) }}" >تغيير حالة الدفع</a>
                                             <a class="dropdown-item bg-primary text-white" href="#" data-toggle="modal" data-target="#transfer_invoice" data-invoice_id="{{$one->id}}" >نقل الى الارشيف</a>
+                                            <a class="dropdown-item bg-primary text-white" href="Print_Invoice/{{ $one->id }}">طباعة الفاتورة</a>
                                         </div>
                                     </div>
                                 </td>
