@@ -78,8 +78,10 @@
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
-                        <a class="modal-effect btn btn-primary btn-block" href="invoices/create"><i
-                                class="fas fa-plus"></i>&nbsp; اضافة فاتورة</a>
+                        <a class="modal-effect btn btn-primary btn-block" href="invoices/create">
+                            <i class="fas fa-plus"></i>&nbsp; اضافة فاتورة</a>
+                        <a class="modal-effect btn btn-success" href="{{ url('Export_Invoices') }}"
+                           style="color:white; width: 140px; height: 40px; margin-right: 10px;"><i class="fas fa-file-download"></i>&nbsp &nbsp;تصدير اكسل</a>
                     </div>
                 </div>
                 <div class="card-body">
