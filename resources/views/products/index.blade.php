@@ -70,12 +70,12 @@
     @endif
     <!-- row -->
     <div class="row">
+        <!--div-->
         <div class="col-xl-12">
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
-                        <a class="modal-effect btn btn-primary btn-block" data-effect="effect-scale" data-toggle="modal" href="#exampleModal"><i
-                                class="fas fa-plus"></i>&nbsp;اضافة منتج</a>
+                        <a class="modal-effect btn btn-primary btn-block" data-effect="effect-scale" data-toggle="modal" href="#exampleModal"><i class="fas fa-plus"></i>&nbsp;اضافة منتج</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -94,24 +94,25 @@
                             <tbody>
                             <?php $i=0?>
                             @foreach($products as $one)
-                            <?php $i++?>
-                            <tr>
-                                <td>{{$i}}</td>
-                                <td>{{$one->product_name}} </td>
-                                <td>{{$one->section->section_name}}</td>
-                                <td>{{$one->description}}</td>
-                                <td>
-                                    <button class="btn btn-sm btn btn-success" href="#edit_modal" title="تعديل" data-product_id="{{ $one->id }}" data-product_name="{{ $one->product_name }}" data-section_name="{{ $one->section->section_name }}" data-description="{{ $one->description }}" data-toggle="modal">تعديل</button>
-                                    <button class="btn btn-sm btn btn-danger" data-product_id="{{ $one->id }}" title="حذف" data-product_name="{{ $one->product_name }}" href="#delete_modal" data-toggle="modal">حذف</button>
-                                </td>
-                            </tr>
-                            </tbody>
+                                <?php $i++?>
+                                <tr>
+                                    <td>{{$i}}</td>
+                                    <td>{{$one->product_name}} </td>
+                                    <td>{{$one->section->section_name}}</td>
+                                    <td>{{$one->description}}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn btn-success" href="#edit_modal" title="تعديل" data-product_id="{{ $one->id }}" data-product_name="{{ $one->product_name }}" data-section_name="{{ $one->section->section_name }}" data-description="{{ $one->description }}" data-toggle="modal">تعديل</button>
+                                        <button class="btn btn-sm btn btn-danger" data-product_id="{{ $one->id }}" title="حذف" data-product_name="{{ $one->product_name }}" href="#delete_modal" data-toggle="modal">حذف</button>
+                                    </td>
+                                </tr>
                             @endforeach
+                            </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
+        <!--/div-->
     </div>
     <!-- row closed -->
 

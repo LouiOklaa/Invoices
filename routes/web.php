@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,5 +43,10 @@ Route::get('Export_Invoices', 'InvoicesController@export');
 Route::resource('sections', 'SectionsController');
 
 Route::resource('products', 'ProductsController');
+
+Route::group(['middleware' => ['auth']], function() {
+    Route::resource('roles','RoleController');
+    Route::resource('users','UserController');
+});
 
 Route::get('/{page}', 'AdminController@index');
