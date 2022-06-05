@@ -103,8 +103,12 @@
                                             <button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-rounded btn-sm btn-primary"
                                                     data-toggle="dropdown" id="dropdownMenuButton" type="button">&nbsp العمليات &nbsp<i class="fas fa-caret-down ml-1"></i></button>
                                             <div  class="dropdown-menu tx-10">
-                                                <a class="dropdown-item bg-primary text-white" href="#" data-toggle="modal" data-target="#transfer_invoice" data-invoice_id="{{$one->id}}" >نقل الى قائمة الفواتير</a>
-                                                <a class="dropdown-item bg-primary text-white" href="#" data-toggle="modal" data-target="#delete_invoice" data-invoice_id="{{$one->id}}" >حذف الفاتورة</a>
+                                                @can('استعادة الفاتورة')
+                                                   <a class="dropdown-item bg-primary text-white" href="#" data-toggle="modal" data-target="#transfer_invoice" data-invoice_id="{{$one->id}}" >نقل الى قائمة الفواتير</a>
+                                                @endcan
+                                                @can('حذف فاتورة مؤرشفة')
+                                                   <a class="dropdown-item bg-primary text-white" href="#" data-toggle="modal" data-target="#delete_invoice" data-invoice_id="{{$one->id}}" >حذف الفاتورة</a>
+                                                @endcan
                                             </div>
                                         </div>
                                     </td>

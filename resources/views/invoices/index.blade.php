@@ -78,10 +78,14 @@
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
-                        <a class="modal-effect btn btn-primary btn-block" href="invoices/create">
-                            <i class="fas fa-plus"></i>&nbsp; اضافة فاتورة</a>
-                        <a class="modal-effect btn btn-success" href="{{ url('Export_Invoices') }}"
-                           style="color:white; width: 140px; height: 40px; margin-right: 10px;"><i class="fas fa-file-download"></i>&nbsp &nbsp;تصدير اكسل</a>
+                        @can('اضافة فاتورة')
+                            <a class="modal-effect btn btn-primary btn-block" href="invoices/create">
+                                <i class="fas fa-plus"></i>&nbsp; اضافة فاتورة</a>
+                        @endcan
+                        @can('تصدير EXCEL')
+                            <a class="modal-effect btn btn-success" href="{{ url('Export_Invoices') }}"
+                               style="color:white; width: 170px; height: 40px; margin-right: 10px;"><i class="fas fa-file-download"></i>&nbsp &nbsp;تصدير EXCEL</a>
+                        @endcan
                     </div>
                 </div>
                 <div class="card-body">
@@ -136,11 +140,21 @@
                                         <button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-rounded btn-sm btn-primary"
                                                 data-toggle="dropdown" id="dropdownMenuButton" type="button">&nbsp العمليات &nbsp<i class="fas fa-caret-down ml-1"></i></button>
                                         <div  class="dropdown-menu tx-10">
-                                            <a class="dropdown-item bg-primary text-white" href="{{url('edit_invoice')}}/{{$one->id}}">تعديل الفاتورة</a>
-                                            <a class="dropdown-item bg-primary text-white" href="#" data-toggle="modal" data-target="#delete_invoice" data-invoice_id="{{$one->id}}" >حذف الفاتورة</a>
-                                            <a class="dropdown-item bg-primary text-white" href="{{ URL::route('status_show', [$one->id]) }}" >تغيير حالة الدفع</a>
-                                            <a class="dropdown-item bg-primary text-white" href="#" data-toggle="modal" data-target="#transfer_invoice" data-invoice_id="{{$one->id}}" >نقل الى الارشيف</a>
-                                            <a class="dropdown-item bg-primary text-white" href="Print_Invoice/{{ $one->id }}">طباعة الفاتورة</a>
+                                            @can('تعديل الفاتورة')
+                                               <a class="dropdown-item bg-primary text-white" href="{{url('edit_invoice')}}/{{$one->id}}">تعديل الفاتورة</a>
+                                            @endcan
+                                            @can('حذف الفاتورة')
+                                               <a class="dropdown-item bg-primary text-white" href="#" data-toggle="modal" data-target="#delete_invoice" data-invoice_id="{{$one->id}}" >حذف الفاتورة</a>
+                                            @endcan
+                                            @can('تغير حالة الدفع')
+                                               <a class="dropdown-item bg-primary text-white" href="{{ URL::route('status_show', [$one->id]) }}" >تغيير حالة الدفع</a>
+                                            @endcan
+                                            @can('ارشفة الفاتورة')
+                                               <a class="dropdown-item bg-primary text-white" href="#" data-toggle="modal" data-target="#transfer_invoice" data-invoice_id="{{$one->id}}" >نقل الى الارشيف</a>
+                                            @endcan
+                                            @can('طباعةالفاتورة')
+                                               <a class="dropdown-item bg-primary text-white" href="Print_Invoice/{{ $one->id }}">طباعة الفاتورة</a>
+                                            @endcan
                                         </div>
                                     </div>
                                 </td>
