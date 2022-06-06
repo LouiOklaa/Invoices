@@ -5,7 +5,7 @@
     <!--Internal  treeview -->
     <link href="{{URL::asset('assets/plugins/treeview/treeview-rtl.css')}}" rel="stylesheet" type="text/css" />
 @section('title')
-    اضافة الصلاحيات - مورا سوفت للادارة القانونية
+    اضافة الصلاحيات - لؤي سوفت لادارة الفواتير
 @stop
 
 @endsection
@@ -38,9 +38,6 @@
         </div>
     @endif
 
-
-
-
     {!! Form::open(array('route' => 'roles.store','method'=>'POST')) !!}
     <!-- row -->
     <div class="row">
@@ -62,14 +59,17 @@
                                 <li><a href="#">الصلاحيات</a>
                                     <ul>
                                         </li>
-                                        @foreach($permission as $value)
-                                            <label
-                                                style="font-size: 16px;">{{ Form::checkbox('permission[]', $value->id, false, array('class' => 'name')) }}
-                                                {{ $value->name }}</label>
-
+                                            @foreach($permission as $value)
+                                                <label
+                                                    style="font-size: 16px; margin-right: 6px;">
+                                                    <li>
+                                                        {{ Form::checkbox('permission[]', $value->id, false, array('class' => 'name')) }}
+                                                        {{ $value->name }}
+                                                    </li>
+                                                </label>
+                                                <br />
                                             @endforeach
-                                            </li>
-
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>

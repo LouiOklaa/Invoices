@@ -58,6 +58,7 @@ class PermissionTableSeeder extends Seeder
             'اضافة قسم',
             'تعديل قسم',
             'حذف قسم',
+
             'الاشعارات',
         ];
         foreach ($permissions as $permission) {

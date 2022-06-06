@@ -3,10 +3,8 @@
     <!--Internal   Notify -->
     <link href="{{ URL::asset('assets/plugins/notify/css/notifIt.css') }}" rel="stylesheet" />
 @section('title')
-    صلاحيات المستخدمين - مورا سوفت للادارة القانونية
+    صلاحيات المستخدمين - لؤي سوفت لادارة الفواتير
 @stop
-
-
 @endsection
 @section('page-header')
     <!-- breadcrumb -->
@@ -22,38 +20,31 @@
 @endsection
 @section('content')
 
-
     @if (session()->has('Add'))
-        <script>
-            window.onload = function() {
-                notif({
-                    msg: " تم اضافة الصلاحية بنجاح",
-                    type: "success"
-                });
-            }
-        </script>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>&nbsp &nbsp &nbsp &nbsp{{ session()->get('Add') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     @endif
 
-    @if (session()->has('edit'))
-        <script>
-            window.onload = function() {
-                notif({
-                    msg: " تم تحديث بيانات الصلاحية بنجاح",
-                    type: "success"
-                });
-            }
-        </script>
+    @if (session()->has('Edit'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>&nbsp &nbsp &nbsp &nbsp{{ session()->get('Edit') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     @endif
 
-    @if (session()->has('delete'))
-        <script>
-            window.onload = function() {
-                notif({
-                    msg: " تم حذف الصلاحية بنجاح",
-                    type: "error"
-                });
-            }
-        </script>
+    @if (session()->has('Delete'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>&nbsp &nbsp &nbsp &nbsp{{ session()->get('Delete') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     @endif
 
     <!-- row -->
@@ -78,15 +69,17 @@
                         <table class="table mg-b-0 text-md-nowrap table-hover ">
                             <thead>
                             <tr>
-                                <th>#</th>
+                                <th>ID</th>
                                 <th>الاسم</th>
                                 <th>العمليات</th>
                             </tr>
                             </thead>
                             <tbody>
+                            <?php $i=0?>
                             @foreach ($roles as $key => $role)
+                            <?php $i ++?>
                                 <tr>
-                                    <td>{{ ++$i }}</td>
+                                    <td>{{ $i }}</td>
                                     <td>{{ $role->name }}</td>
                                     <td>
                                         @can('عرض صلاحية')
@@ -107,8 +100,6 @@
                                                 {!! Form::close() !!}
                                             @endcan
                                         @endif
-
-
                                     </td>
                                 </tr>
                             @endforeach

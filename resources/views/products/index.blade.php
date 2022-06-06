@@ -75,7 +75,9 @@
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
-                        <a class="modal-effect btn btn-primary btn-block" data-effect="effect-scale" data-toggle="modal" href="#exampleModal"><i class="fas fa-plus"></i>&nbsp;اضافة منتج</a>
+                        @can('اضافة منتج')
+                           <a class="modal-effect btn btn-primary btn-block" data-effect="effect-scale" data-toggle="modal" href="#exampleModal"><i class="fas fa-plus"></i>&nbsp;اضافة منتج</a>
+                        @endcan
                     </div>
                 </div>
                 <div class="card-body">
@@ -101,8 +103,12 @@
                                     <td>{{$one->section->section_name}}</td>
                                     <td>{{$one->description}}</td>
                                     <td>
-                                        <button class="btn btn-sm btn btn-success" href="#edit_modal" title="تعديل" data-product_id="{{ $one->id }}" data-product_name="{{ $one->product_name }}" data-section_name="{{ $one->section->section_name }}" data-description="{{ $one->description }}" data-toggle="modal">تعديل</button>
-                                        <button class="btn btn-sm btn btn-danger" data-product_id="{{ $one->id }}" title="حذف" data-product_name="{{ $one->product_name }}" href="#delete_modal" data-toggle="modal">حذف</button>
+                                        @can('تعديل منتج')
+                                           <button class="btn btn-sm btn btn-success" href="#edit_modal" title="تعديل" data-product_id="{{ $one->id }}" data-product_name="{{ $one->product_name }}" data-section_name="{{ $one->section->section_name }}" data-description="{{ $one->description }}" data-toggle="modal">تعديل</button>
+                                        @endcan
+                                        @can('حذف منتج')
+                                           <button class="btn btn-sm btn btn-danger" data-product_id="{{ $one->id }}" title="حذف" data-product_name="{{ $one->product_name }}" href="#delete_modal" data-toggle="modal">حذف</button>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

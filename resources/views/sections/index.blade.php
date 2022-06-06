@@ -66,7 +66,9 @@
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
-                        <a class="modal-effect btn btn-primary btn-block" data-effect="effect-scale" data-toggle="modal" href="#modaldemo8"><i class="fas fa-plus"></i>&nbsp;اضافة قسم</a>
+                        @can('اضافة قسم')
+                           <a class="modal-effect btn btn-primary btn-block" data-effect="effect-scale" data-toggle="modal" href="#modaldemo8"><i class="fas fa-plus"></i>&nbsp;اضافة قسم</a>
+                        @endcan
                     </div>
                 </div>
                 <div class="card-body">
@@ -89,8 +91,12 @@
                                 <td>{{$one->section_name}}</td>
                                 <td>{{$one->description}}</td>
                                 <td>
-                                    <button class="btn btn-sm btn btn-success" href="#editmodal" title="تعديل" data-id="{{ $one->id }}" data-section_name="{{ $one->section_name }}" data-description="{{ $one->description }}" data-toggle="modal">تعديل</button>
-                                    <button class="btn btn-sm btn btn-danger" data-id="{{ $one->id }}" title="حذف" data-section_name="{{ $one->section_name }}" href="#modaldemo9" data-toggle="modal">حذف</button>
+                                    @can('تعديل قسم')
+                                       <button class="btn btn-sm btn btn-success" href="#editmodal" title="تعديل" data-id="{{ $one->id }}" data-section_name="{{ $one->section_name }}" data-description="{{ $one->description }}" data-toggle="modal">تعديل</button>
+                                    @endcan
+                                    @can('حذف قسم')
+                                       <button class="btn btn-sm btn btn-danger" data-id="{{ $one->id }}" title="حذف" data-section_name="{{ $one->section_name }}" href="#modaldemo9" data-toggle="modal">حذف</button>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach
