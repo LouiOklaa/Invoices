@@ -230,13 +230,13 @@
                                                                 <td>{{$one->created_by}}</td>
                                                                 <td>{{$one->created_at}}</td>
                                                                 <td colspan="2">
-                                                                    @can('عرض المرفقات')
+                                                                    @can('عرض مرفق')
                                                                         <a class="btn btn-success btn-sm" style="color: white;" href="{{ url('View_file') }}/{{ $invoices->invoice_number }}/{{ $one->file_name }}" role="button"><i class="fas fa-eye"></i>&nbsp;عرض</a>
                                                                     @endcan
-                                                                    @can('تحميل المرفقات')
+                                                                    @can('تحميل مرفق')
                                                                        <a class="btn btn-info btn-sm" style="color: white;" href="{{ url('Download_file') }}/{{ $invoices->invoice_number }}/{{ $one->file_name }}" role="button"><i class="fas fa-download"></i>&nbsp;تحميل</a>
                                                                     @endcan
-                                                                    @can('حذف المرفق')
+                                                                    @can('حذف مرفق')
                                                                         <button class="btn btn-danger btn-sm" data-toggle="modal" data-file_name="{{ $one->file_name }}" data-invoice_number="{{ $one->invoice_number }}" data-id_file="{{ $one->id }}" data-target="#delete_file">حذف</button>
                                                                     @endcan
                                                                 </td>

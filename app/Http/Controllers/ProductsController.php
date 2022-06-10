@@ -14,6 +14,19 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+        $this->middleware('permission:المنتجات|اضافة منتج|تعديل منتج|حذف منتج', ['only' => ['index']]);
+        $this->middleware('permission:اضافة منتج', ['only' => ['store']]);
+        $this->middleware('permission:تعديل منتج', ['only' => ['update']]);
+        $this->middleware('permission:حذف منتج', ['only' => ['destroy']]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $products = Products::all();

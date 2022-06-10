@@ -53,7 +53,7 @@
                         <table class="table table-hover" id="example1" data-page-length='50' style=" text-align: center;">
                             <thead>
                             <tr>
-                                <th class="wd-10p border-bottom-0">#</th>
+                                <th class="wd-10p border-bottom-0">ID</th>
                                 <th class="wd-15p border-bottom-0">اسم المستخدم</th>
                                 <th class="wd-20p border-bottom-0">البريد الالكتروني</th>
                                 <th class="wd-15p border-bottom-0">حالة المستخدم</th>
@@ -65,7 +65,9 @@
                             @foreach ($data as $key => $user)
                                 <tr>
                                     <td>{{ ++$i }}</td>
-                                    <td>{{ $user->name }}</td>
+                                    <td>
+                                        <a href="{{ url('users') }}/{{ $user->id }}">{{$user->name}}</a>
+                                    </td>
                                     <td>{{ $user->email }}</td>
                                     <td>
                                         @if ($user->status == 'مفعل')

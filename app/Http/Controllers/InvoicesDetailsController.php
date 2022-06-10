@@ -15,6 +15,19 @@ class InvoicesDetailsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+        $this->middleware('permission:اضافة مرفق|عرض مرفق|تحميل مرفق|حذف مرفق', ['only' => ['show']]);
+        $this->middleware('permission:حذف مرفق', ['only' => ['destroy']]);
+        $this->middleware('permission:عرض مرفق', ['only' => ['view_file']]);
+        $this->middleware('permission:تحميل مرفق', ['only' => ['download_file']]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         //

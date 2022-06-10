@@ -12,6 +12,18 @@ class InvoicesArchiveController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+        $this->middleware('permission:الفواتير المؤرشفة|استعادة الفاتورة|حذف فاتورة مؤرشفة', ['only' => ['index']]);
+        $this->middleware('permission:استعادة الفاتورة', ['only' => ['update']]);
+        $this->middleware('permission:حذف فاتورة مؤرشفة', ['only' => ['destroy']]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $invoices = Invoices::onlyTrashed()->get();

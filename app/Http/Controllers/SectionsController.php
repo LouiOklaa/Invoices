@@ -13,6 +13,19 @@ class SectionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+        $this->middleware('permission:الاقسام|اضافة قسم|تعديل قسم|حذف قسم', ['only' => ['index']]);
+        $this->middleware('permission:اضافة قسم', ['only' => ['store']]);
+        $this->middleware('permission:تعديل قسم', ['only' => ['update']]);
+        $this->middleware('permission:حذف قسم', ['only' => ['destroy']]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $sections = sections::all();
