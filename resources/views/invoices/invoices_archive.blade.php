@@ -94,7 +94,7 @@
                                         @elseif($one->value_status == 2)
                                             <label class="badge badge-danger">{{$one->status}}</label>
                                         @else
-                                            <label class="badge badge-warning">{{$one->status}}</label>
+                                            <label class="badge badge-warning" style="color: white;">{{$one->status}}</label>
                                         @endif
                                     </td>
                                     <td>{{$one->note}}</td>
