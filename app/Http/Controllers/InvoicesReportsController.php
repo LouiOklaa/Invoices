@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 
 class InvoicesReportsController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+        $this->middleware('permission:تقرير الفواتير', ['only' => ['index' , 'search_invoices']]);
+    }
+
     public function index(){
 
     return view('reports.invoices_reports');

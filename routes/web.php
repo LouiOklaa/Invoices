@@ -40,6 +40,8 @@ Route::resource('Invoices_Archive', 'InvoicesArchiveController');
 Route::get('Export_Invoices', 'InvoicesController@export');
 Route::get('Invoices_Reports' , 'InvoicesReportsController@index');
 Route::post('Search_Invoices' , 'InvoicesReportsController@search_invoices');
+Route::get('Customers_Reports' , 'CustomersReportsController@index');
+Route::post('Search_Customers' , 'CustomersReportsController@search_customers');
 
 Route::resource('sections', 'SectionsController');
 
