@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Auth;
 
 class AddInvoice extends Notification
 {
@@ -30,7 +31,7 @@ class AddInvoice extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail' , 'database'];
     }
 
     /**
@@ -47,6 +48,23 @@ class AddInvoice extends Notification
                     ->line('اضافة فاتورة جديدة')
                     ->action('عرض الفاتورة', $url)
                     ->line('شكرا لاستخدامك مورا سوفت لادارة الفواتير');
+    }
+
+    /**
+     * Get the array representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function toDatabase($notifiable)
+    {
+        return [
+
+            'id'=> $this->InvoiceID,
+            'title'=>'تم اضافة فاتورة جديد بواسطة :',
+            'user'=> Auth::user()->name,
+
+        ];
     }
 
     /**

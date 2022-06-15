@@ -114,13 +114,16 @@ class InvoicesController extends Controller
             $attachments->invoice_id = $InvoiceID;
             $attachments->save();
 
-            // move pic
+            // Move Pic
             $request->attachment->move(public_path('Attachments/' . $invoice_number), $file_name);
 
         }
 
-        $user = User::first();
-        Notification::send($user, new AddInvoice($InvoiceID));
+        //Send Notification & Mail
+        $user = User::where('roles_name' , '=' , '["owner"]')->orWhere('roles_name' , '=' , '["Admin"]')->get();
+        Notification::send($user, new \App\Notifications\AddInvoice($InvoiceID));
+
+
 
         session()->flash('Add', 'تم اضافة الفاتورة بنجاح');
         return redirect('/invoices');
@@ -328,6 +331,16 @@ class InvoicesController extends Controller
 
         return Excel::download(new InvoicesExport , 'Invoices.xlsx');
 
+    }
+
+    public function MarkAsRead_All ()
+    {
+        $userUnreadNotification= auth()->user()->unreadNotifications;
+
+        if($userUnreadNotification) {
+            $userUnreadNotification->markAsRead();
+            return back();
+        }
     }
 
 }

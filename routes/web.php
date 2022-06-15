@@ -42,6 +42,7 @@ Route::get('Invoices_Reports' , 'InvoicesReportsController@index');
 Route::post('Search_Invoices' , 'InvoicesReportsController@search_invoices');
 Route::get('Customers_Reports' , 'CustomersReportsController@index');
 Route::post('Search_Customers' , 'CustomersReportsController@search_customers');
+Route::get('MarkAsRead_All','InvoicesController@MarkAsRead_All')->name('MarkAsRead_All');
 
 Route::resource('sections', 'SectionsController');
 
