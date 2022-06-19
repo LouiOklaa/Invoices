@@ -77,10 +77,10 @@
                             <a class="modal-effect btn btn-primary btn-block" href="invoices/create">
                                 <i class="fas fa-plus"></i>&nbsp; اضافة فاتورة</a>
                         @endcan
-                            @can('تصدير EXCEL')
-                                <a class="modal-effect btn btn-success" href="{{ url('Export_Invoices') }}/{{ 2 }}"
-                                   style="color:white; width: 170px; height: 40px; margin-right: 10px;"><i class="fas fa-file-download"></i>&nbsp &nbsp;تصدير EXCEL</a>
-                            @endcan
+                        @can('تصدير EXCEL')
+                            <a class="modal-effect btn btn-success" href="{{ url('Export_Invoices') }}/{{ 2 }}"
+                               style="color:white; width: 170px; height: 40px; margin-right: 10px;"><i class="fas fa-file-download"></i>&nbsp &nbsp;تصدير EXCEL</a>
+                        @endcan
                     </div>
                 </div>
                 <div class="card-body">

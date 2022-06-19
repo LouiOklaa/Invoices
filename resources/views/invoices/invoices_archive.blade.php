@@ -51,6 +51,14 @@
         <!--div-->
         <div class="col-xl-12">
             <div class="card mg-b-20">
+                <div class="card-header pb-0">
+                    <div class="d-flex justify-content-between">
+                        @can('تصدير EXCEL')
+                            <a class="modal-effect btn btn-success btn-block" href="{{ url('Export_Invoices') }}/{{ 5 }}">
+                                <i class="fas fa-file-download"></i>&nbsp; تصدير EXCEL</a>
+                        @endcan
+                    </div>
+                </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="example1" class="table key-buttons text-md-nowrap" data-page-length='50'>

@@ -48,9 +48,11 @@ class InvoicesExport implements FromCollection,WithHeadings
 
             return invoices::select('invoice_number', 'invoice_Date', 'due_date','section_name', 'product','discount', 'rate_VAT', 'value_VAT','total', 'status', 'payment_date','note')->where('value_status','=' , 3)->get();
         }
+        //Export Archive Invoices
+        elseif ($this->page_id == 5){
 
-
-
+            return invoices::onlyTrashed()->select('invoice_number', 'invoice_Date', 'due_date','section_name', 'product','discount', 'rate_VAT', 'value_VAT','total', 'status', 'payment_date','note')->get();
+        }
 
     }
 
