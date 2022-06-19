@@ -86,7 +86,7 @@ h2.resp-tab-title:last-child {
 	height:100%;
 }
 
-.resp-vtabs li.resp-tab-active { 
+.resp-vtabs li.resp-tab-active {
 	position: relative;
 	margin: 7px 15px;
     text-align: center;

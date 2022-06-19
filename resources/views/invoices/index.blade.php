@@ -83,8 +83,8 @@
                                 <i class="fas fa-plus"></i>&nbsp; اضافة فاتورة</a>
                         @endcan
                         @can('تصدير EXCEL')
-                            <a class="modal-effect btn btn-success" href="{{ url('Export_Invoices') }}"
-                               style="color:white; width: 170px; height: 40px; margin-right: 10px;"><i class="fas fa-file-download"></i>&nbsp &nbsp;تصدير EXCEL</a>
+                            <a class="modal-effect btn btn-success" href="{{ url('Export_Invoices') }}/{{ 1 }}"
+                              style="color:white; width: 170px; height: 40px; margin-right: 10px;"><i class="fas fa-file-download"></i>&nbsp &nbsp;تصدير EXCEL</a>
                         @endcan
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                         <table id="example1" class="table key-buttons text-md-nowrap" data-page-length='50'>
                             <thead>
                             <tr>
-                                <th class="border-bottom-0">ID</th>
+                                <th class="border-bottom-0" style="text-align-last: right">ID</th>
                                 <th class="border-bottom-0">رقم الفاتورة</th>
                                 <th class="border-bottom-0">تاريخ الفاتورة</th>
                                 <th class="border-bottom-0">تاريخ الاستحقاق</th>

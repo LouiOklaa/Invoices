@@ -21,6 +21,7 @@ class CreateInvoicesTable extends Migration
             $table->string('product', 50);
             $table->bigInteger( 'section_id' )->unsigned();
             $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
+            $table->string('section_name', 99);
             $table->decimal('amount_collection',8,2)->nullable();;
             $table->decimal('amount_commission',8,2);
             $table->decimal('discount',8,2);

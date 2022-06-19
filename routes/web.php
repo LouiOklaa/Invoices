@@ -37,7 +37,7 @@ Route::get('Unpaid_Invoices' , 'InvoicesController@unpaid_invoices');
 Route::get('Partial_Invoices' , 'InvoicesController@partial_invoices');
 Route::get('Print_Invoice/{id}' , 'InvoicesController@print_invoice');
 Route::resource('Invoices_Archive', 'InvoicesArchiveController');
-Route::get('Export_Invoices', 'InvoicesController@export');
+Route::get('Export_Invoices/{page_id}', 'InvoicesController@export');
 Route::get('Invoices_Reports' , 'InvoicesReportsController@index');
 Route::post('Search_Invoices' , 'InvoicesReportsController@search_invoices');
 Route::get('Customers_Reports' , 'CustomersReportsController@index');

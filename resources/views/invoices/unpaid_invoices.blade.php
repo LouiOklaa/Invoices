@@ -69,6 +69,18 @@
         <!--div-->
         <div class="col-xl-12">
             <div class="card mg-b-20">
+                <div class="card-header pb-0">
+                    <div class="d-flex justify-content-between">
+                        @can('اضافة فاتورة')
+                            <a class="modal-effect btn btn-primary btn-block" href="invoices/create">
+                                <i class="fas fa-plus"></i>&nbsp; اضافة فاتورة</a>
+                        @endcan
+                            @can('تصدير EXCEL')
+                                <a class="modal-effect btn btn-success" href="{{ url('Export_Invoices') }}/{{ 3 }}"
+                                   style="color:white; width: 170px; height: 40px; margin-right: 10px;"><i class="fas fa-file-download"></i>&nbsp &nbsp;تصدير EXCEL</a>
+                            @endcan
+                    </div>
+                </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="example1" class="table key-buttons text-md-nowrap" data-page-length='50'>

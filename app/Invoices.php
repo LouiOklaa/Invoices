@@ -12,6 +12,7 @@ class Invoices extends Model
         'invoice_Date',
         'due_date',
         'product',
+        'section_name',
         'section_id',
         'amount_collection',
         'amount_commission',

@@ -67,12 +67,15 @@ class InvoicesController extends Controller
      */
     public function store(Request $request)
     {
+        $section_name = Sections::where('id' , '=' , $request->section)->first();
+
         Invoices::create([
 
            'invoice_number' => $request->invoice_number,
            'invoice_Date' => $request->invoice_Date,
            'due_date' => $request->due_date,
            'product' => $request->product,
+           'section_name' => $section_name->section_name,
            'section_id' => $request->section,
            'amount_collection' => $request->amount_collection,
            'amount_commission' => $request->amount_commission,
@@ -327,9 +330,9 @@ class InvoicesController extends Controller
 
     }
 
-    public function export () {
+    public function export ($page_id) {
 
-        return Excel::download(new InvoicesExport , 'Invoices.xlsx');
+        return Excel::download(new InvoicesExport($page_id) , 'Invoices.xlsx');
 
     }
 
