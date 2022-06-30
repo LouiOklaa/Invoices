@@ -127,7 +127,11 @@
                                             <label class="badge badge-warning" style="color: white;">{{$one->status}}</label>
                                         @endif
                                     </td>
-                                    <td>{{$one->note}}</td>
+                                    @if($one->note == NULL)
+                                        <td style="text-align: center; color: #BEC1C8">---</td>
+                                    @else
+                                        <td style="text-align: center">{{$one->note}}</td>
+                                    @endif
                                     <td>
                                         <div class="dropdown ">
                                             <button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-rounded btn-sm btn-primary"
@@ -137,14 +141,13 @@
                                                     <a class="dropdown-item bg-primary text-white" href="{{url('edit_invoice')}}/{{$one->id}}">تعديل الفاتورة</a>
                                                 @endcan
                                                 @can('حذف الفاتورة')
-                                                    <a class="dropdown-item bg-primary text-white" href="#" data-toggle="modal" data-target="#delete_invoice" data-invoice_id="{{$one->id}}" >حذف الفاتورة</a>
+                                                    <a class="dropdown-item bg-primary text-white" href="#" data-toggle="modal" data-target="#delete_invoice" data-invoice_id="{{$one->id}}" data-invoice_number="{{$one->invoice_number}}">حذف الفاتورة</a>
                                                 @endcan
                                                 @can('تغير حالة الدفع')
                                                     <a class="dropdown-item bg-primary text-white" href="{{ URL::route('status_show', [$one->id]) }}" >تغيير حالة الدفع</a>
                                                 @endcan
                                                 @can('ارشفة الفاتورة')
-                                                    <a class="dropdown-item bg-primary text-white" href="#" data-toggle="modal" data-target="#transfer_invoice" data-invoice_id="{{$one->id}}" >نقل الى الارشيف</a>
-                                                @endcan
+                                                        <a class="dropdown-item bg-primary text-white" href="#" data-toggle="modal" data-target="#transfer_invoice" data-invoice_id="{{$one->id}}" data-invoice_number="{{$one->invoice_number}}">نقل الى الارشيف</a>                                                @endcan
                                                 @can('طباعةالفاتورة')
                                                     <a class="dropdown-item bg-primary text-white" href="Print_Invoice/{{ $one->id }}">طباعة الفاتورة</a>
                                                 @endcan
@@ -177,8 +180,9 @@
                     {{ method_field('delete') }}
                     {{ csrf_field() }}
                     <div class="modal-body">
-                        هل انت متاكد من عملية الحذف ؟
+                        <p>هل انت متاكد من عملية الحذف ؟</p>
                         <input type="hidden" name="invoice_id" id="invoice_id" value="">
+                        <input class="form-control" name="invoice_number" id="invoice_number" type="text" readonly>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
@@ -206,9 +210,10 @@
                     {{ method_field('delete') }}
                     {{ csrf_field() }}
                     <div class="modal-body">
-                        هل انت متاكد من عملية الارشفة ؟
+                        <p>هل انت متاكد من عملية الارشفة ؟</p>
                         <input type="hidden" name="invoice_id" id="invoice_id" value="">
                         <input type="hidden" name="page_id" id="page_id" value="2">
+                        <input class="form-control" name="invoice_number" id="invoice_number" type="text" readonly>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
@@ -255,8 +260,10 @@
         $('#delete_invoice').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var invoice_id = button.data('invoice_id')
+            var invoice_number = button.data('invoice_number')
             var modal = $(this)
             modal.find('.modal-body #invoice_id').val(invoice_id);
+            modal.find('.modal-body #invoice_number').val(invoice_number);
         })
     </script>
 
@@ -264,8 +271,10 @@
         $('#transfer_invoice').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var invoice_id = button.data('invoice_id')
+            var invoice_number = button.data('invoice_number')
             var modal = $(this)
             modal.find('.modal-body #invoice_id').val(invoice_id);
+            modal.find('.modal-body #invoice_number').val(invoice_number);
         })
     </script>
 

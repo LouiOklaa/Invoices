@@ -63,7 +63,7 @@ class InvoicesDetailsController extends Controller
     public function show($id)
     {
 
-        $invoices = Invoices::where('id' , $id)->first();
+        $invoices = Invoices::withTrashed()->where('id' , $id)->first();
         $details = Invoices_Details::where('invoice_id' , $id)->get();
         $attachments = Invoices_Attachments::where('invoice_id' , $id)->get();
 

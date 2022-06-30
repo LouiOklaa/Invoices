@@ -36,7 +36,7 @@
     @endif
     @if (session()->has('Add'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('Add') }}</strong>
+            <strong>&nbsp &nbsp &nbsp &nbsp{{ session()->get('Add') }}</strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -44,7 +44,7 @@
     @endif
     @if (session()->has('delete'))
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('delete') }}</strong>
+            <strong>&nbsp &nbsp &nbsp &nbsp{{ session()->get('delete') }}</strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -117,14 +117,18 @@
                                                             @elseif($invoices->value_status == 2)
                                                                 <label class="badge badge-danger">{{$invoices->status}}</label>
                                                             @else
-                                                                <label class="badge badge-warning">{{$invoices->status}}</label>
+                                                                <label class="badge badge-warning" style="color: white;">{{$invoices->status}}</label>
                                                             @endif
                                                         </td>
                                                     </tr>
 
                                                     <tr>
                                                         <th scope="row">ملاحظات</th>
-                                                        <td>لا يوجد</td>
+                                                        @if($invoices->note == NULL)
+                                                            <td style="text-align: center; color: #BEC1C8">---</td>
+                                                        @else
+                                                            <td style="text-align: center">{{$invoices->note}}</td>
+                                                        @endif
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -159,16 +163,23 @@
                                                             <td>{{$one->product}}</td>
                                                             <td>{{$invoices->section->section_name}}</td>
                                                             <td>
-                                                                @if ($one->value_status == 1)
-                                                                    <label class="badge badge-success">{{$one->status}}</label>
+                                                                @if ($one->value_status == 1)<label class="badge badge-success">{{$one->status}}</label>
                                                                 @elseif($one->value_status == 2)
                                                                     <label class="badge badge-danger">{{$one->status}}</label>
                                                                 @else
                                                                     <label class="badge badge-warning" style="color: white;">{{$one->status}}</label>
                                                                 @endif
                                                             </td>
-                                                            <td>{{$one->payment_date}}</td>
-                                                            <td>{{$one->note}}</td>
+                                                            @if($one->payment_date == NULL)
+                                                                <td style="text-align: center; color: #BEC1C8">---</td>
+                                                            @else
+                                                                <td>{{$one->payment_date}}</td>
+                                                            @endif
+                                                            @if($one->note == NULL)
+                                                                <td style="text-align: center; color: #BEC1C8">---</td>
+                                                            @else
+                                                                <td style="text-align: center">{{$one->note}}</td>
+                                                            @endif
                                                             <td>{{$one->created_at}}</td>
                                                             <td>{{$one->user}}</td>
                                                         </tr>
@@ -213,7 +224,7 @@
                                                            style="text-align:center">
                                                         <thead>
                                                         <tr class="text-dark">
-                                                            <th scope="col">م</th>
+                                                            <th scope="col">ID</th>
                                                             <th scope="col">اسم الملف</th>
                                                             <th scope="col">قام بالاضافة</th>
                                                             <th scope="col">تاريخ الاضافة</th>
@@ -273,15 +284,14 @@
                 <form action="{{ route('Delete_file') }}" method="post">
                     {{ csrf_field() }}
                     <div class="modal-body">
-                        <p class="text-center"> <h6 style="color:red"> هل انت متاكد من عملية حذف المرفق ؟</h6></p>
-
+                        هل انت متاكد من عملية الحذف ؟
                         <input type="hidden" name="id_file" id="id_file" value="">
                         <input type="hidden" name="file_name" id="file_name" value="">
                         <input type="hidden" name="invoice_number" id="invoice_number" value="">
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">الغاء</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
                         <button type="submit" class="btn btn-danger">تاكيد</button>
                     </div>
                 </form>

@@ -105,17 +105,21 @@
                                             <label class="badge badge-warning" style="color: white;">{{$one->status}}</label>
                                         @endif
                                     </td>
-                                    <td>{{$one->note}}</td>
+                                    @if($one->note == NULL)
+                                        <td style="text-align: center; color: #BEC1C8">---</td>
+                                    @else
+                                        <td style="text-align: center">{{$one->note}}</td>
+                                    @endif
                                     <td>
                                         <div class="dropdown ">
                                             <button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-rounded btn-sm btn-primary"
                                                     data-toggle="dropdown" id="dropdownMenuButton" type="button">&nbsp العمليات &nbsp<i class="fas fa-caret-down ml-1"></i></button>
                                             <div  class="dropdown-menu tx-10">
                                                 @can('استعادة الفاتورة')
-                                                   <a class="dropdown-item bg-primary text-white" href="#" data-toggle="modal" data-target="#transfer_invoice" data-invoice_id="{{$one->id}}" >نقل الى قائمة الفواتير</a>
+                                                   <a class="dropdown-item bg-primary text-white" href="#" data-toggle="modal" data-target="#transfer_invoice" data-invoice_id="{{$one->id}}" data-invoice_number="{{$one->invoice_number}}">نقل الى قائمة الفواتير</a>
                                                 @endcan
                                                 @can('حذف فاتورة مؤرشفة')
-                                                   <a class="dropdown-item bg-primary text-white" href="#" data-toggle="modal" data-target="#delete_invoice" data-invoice_id="{{$one->id}}" >حذف الفاتورة</a>
+                                                    <a class="dropdown-item bg-primary text-white" href="#" data-toggle="modal" data-target="#delete_invoice" data-invoice_id="{{$one->id}}" data-invoice_number="{{$one->invoice_number}}">حذف الفاتورة</a>
                                                 @endcan
                                             </div>
                                         </div>
@@ -147,8 +151,9 @@
                     {{ method_field('delete') }}
                     {{ csrf_field() }}
                     <div class="modal-body">
-                        هل انت متاكد من عملية الحذف ؟
+                        <p>هل انت متاكد من عملية الحذف ؟</p>
                         <input type="hidden" name="invoice_id" id="invoice_id" value="">
+                        <input class="form-control" name="invoice_number" id="invoice_number" type="text" readonly>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
@@ -175,8 +180,9 @@
                     {{ method_field('patch') }}
                     {{ csrf_field() }}
                     <div class="modal-body">
-                        هل انت متاكد من عملية الغاء الارشفة ؟
+                        <p>هل انت متاكد من عملية الغاء الارشفة ؟</p>
                         <input type="hidden" name="invoice_id" id="invoice_id" value="">
+                        <input class="form-control" name="invoice_number" id="invoice_number" type="text" readonly>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
@@ -187,6 +193,13 @@
         </div>
     </div>
     <!-- End Transfer Modal -->
+
+    </div>
+    <!-- row closed -->
+    </div>
+    <!-- Container closed -->
+    </div>
+    <!-- main-content closed -->
 
 @endsection
 @section('js')
@@ -217,8 +230,10 @@
         $('#delete_invoice').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var invoice_id = button.data('invoice_id')
+            var invoice_number = button.data('invoice_number')
             var modal = $(this)
             modal.find('.modal-body #invoice_id').val(invoice_id);
+            modal.find('.modal-body #invoice_number').val(invoice_number);
         })
     </script>
 
@@ -226,8 +241,10 @@
         $('#transfer_invoice').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var invoice_id = button.data('invoice_id')
+            var invoice_number = button.data('invoice_number')
             var modal = $(this)
             modal.find('.modal-body #invoice_id').val(invoice_id);
+            modal.find('.modal-body #invoice_number').val(invoice_number);
         })
     </script>
 

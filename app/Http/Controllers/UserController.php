@@ -53,17 +53,21 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
             'roles_name' => 'required'
+
         ]);
+
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
         $user = User::create($input);
         $user->assignRole($request->input('roles_name'));
-        return redirect()->route('users.index')
-            ->with('success','User created successfully');
+
+        session()->flash('Add','تم اضافة المستخدم بنجاح');
+        return redirect()->route('users.index');
     }
     /**
      * Display the specified resource.
@@ -99,23 +103,33 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
+
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
             'password' => 'same:confirm-password',
             'roles_name' => 'required'
+
         ]);
+
         $input = $request->all();
         if(!empty($input['password'])){
+
             $input['password'] = Hash::make($input['password']);
-        }else{
-            $input = array_except($input,array('password'));
+
         }
+        else{
+
+            $input = array_except($input,array('password'));
+
+        }
+
         $user = User::find($id);
         $user->update($input);
         DB::table('model_has_roles')->where('model_id',$id)->delete();
         $user->assignRole($request->input('roles_name'));
-        return redirect()->route('users.index')
-            ->with('success','User updated successfully');
+
+        session()->flash('Edit','تم تعديل المستخدم بنجاح');
+        return redirect()->route('users.index');
     }
     /**
      * Remove the specified resource from storage.
@@ -123,10 +137,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        User::find($id)->delete();
-        return redirect()->route('users.index')
-            ->with('success','User deleted successfully');
+        User::find($request->user_id)->delete();
+
+        session()->flash('Delete','تم حذف المستخدم بنجاح');
+        return redirect()->route('users.index');
     }
 }

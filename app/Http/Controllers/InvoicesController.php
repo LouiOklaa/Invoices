@@ -7,7 +7,6 @@ use App\Invoices;
 use App\Invoices_Details;
 use App\Invoices_Attachments;
 use App\Sections;
-use App\Notifications\AddInvoice;
 use App\User;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Http\Request;
@@ -121,14 +120,12 @@ class InvoicesController extends Controller
             $request->attachment->move(public_path('Attachments/' . $invoice_number), $file_name);
 
         }
+        session()->flash('Add','تم اضافة الفاتورة بنجاح');
 
         //Send Notification & Mail
         $user = User::where('roles_name' , '=' , '["owner"]')->orWhere('roles_name' , '=' , '["Admin"]')->get();
         Notification::send($user, new \App\Notifications\AddInvoice($InvoiceID));
 
-
-
-        session()->flash('Add', 'تم اضافة الفاتورة بنجاح');
         return redirect('/invoices');
 
     }
@@ -193,7 +190,7 @@ class InvoicesController extends Controller
 //        $invoices->delete();
 //        Storage::disk('public_uploads')->delete($request->invoice_number.'/'.$attachment->file_name);
 
-        session()->flash('edit_invoice','تم تعديل الفاتورة بنجاج');
+        session()->flash('Edit','تم تعديل الفاتورة بنجاج');
         return redirect('/invoices');
     }
 
@@ -218,7 +215,7 @@ class InvoicesController extends Controller
             }
 
             $invoices->forceDelete();
-            session()->flash('delete_invoice' , 'تم حدف الفاتورة بنجاح');
+            session()->flash('Delete' , 'تم حدف الفاتورة بنجاح');
             return redirect('/invoices');
 
         }
@@ -296,7 +293,7 @@ class InvoicesController extends Controller
 
         }
 
-        session()->flash('status_update' , 'تم تغيير حالة الدفع بنجاح');
+        session()->flash('Update_Status' , 'تم تغيير حالة الدفع بنجاح');
         return redirect('/invoices');
 
 

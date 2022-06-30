@@ -117,12 +117,10 @@ class ProductsController extends Controller
 
             'product_name' => 'required|max:255',
             'section_name' => 'required',
-            'description' => 'required',
         ],[
 
             'product_name.required' =>'يرجي ادخال اسم المنتج',
             'section_name.required' => 'يرجى تحديد القسم',
-            'description.required' =>'يرجي ادخال ملاحظات',
 
         ]);
 

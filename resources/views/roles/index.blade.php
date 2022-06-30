@@ -94,10 +94,11 @@
 
                                         @if ($role->name !== 'owner')
                                             @can('حذف صلاحية')
-                                                {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy',
-                                                $role->id], 'style' => 'display:inline']) !!}
-                                                {!! Form::submit('حذف', ['class' => 'btn btn-danger btn-sm']) !!}
-                                                {!! Form::close() !!}
+{{--                                                {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy',--}}
+{{--                                                $role->id], 'style' => 'display:inline']) !!}--}}
+{{--                                                {!! Form::submit('حذف', ['class' => 'btn btn-danger btn-sm']) !!}--}}
+{{--                                                {!! Form::close() !!}--}}
+                                                    <button class="btn btn-sm btn btn-danger" data-role_id="{{ $role->id }}" title="حذف" data-role_name="{{ $role->name }}" href="#delete_modal" data-toggle="modal">حذف</button>
                                             @endcan
                                         @endif
                                     </td>
@@ -110,6 +111,33 @@
             </div>
         </div>
         <!--/div-->
+
+        {{--  Start Delete Modal  --}}
+        <div class="modal fade" id="delete_modal">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content modal-content-demo">
+                    <div class="modal-header">
+                        <h6 class="modal-title">حذف الصلاحية</h6>
+                        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <form action="roles/destroy" method="post">
+                        {{method_field('delete')}}
+                        {{csrf_field()}}
+                        <div class="modal-body">
+                            <p>هل انت متاكد من عملية الحذف ؟</p><br>
+                            <input type="hidden" name="role_id" id="role_id" value="">
+                            <input class="form-control" name="role_name" id="role_name" type="text" readonly>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
+                            <button type="submit" class="btn btn-danger">تاكيد</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {{--  End Delete Modal  --}}
+
     </div>
     <!-- row closed -->
     </div>
@@ -121,4 +149,15 @@
     <!--Internal  Notify js -->
     <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
+    {{--  Delete Modal Script  --}}
+    <script>
+        $('#delete_modal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var role_id = button.data('role_id')
+            var role_name = button.data('role_name')
+            var modal = $(this)
+            modal.find('.modal-body #role_id').val(role_id);
+            modal.find('.modal-body #role_name').val(role_name);
+        })
+    </script>
 @endsection

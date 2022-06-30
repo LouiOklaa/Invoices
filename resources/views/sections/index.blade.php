@@ -89,7 +89,11 @@
                             <tr>
                                 <td>{{$i}}</td>
                                 <td>{{$one->section_name}}</td>
-                                <td>{{$one->description}}</td>
+                                @if($one->description == NULL)
+                                    <td style="text-align: center; color: #BEC1C8">---</td>
+                                @else
+                                    <td>{{$one->description}}</td>
+                                @endif
                                 <td>
                                     @can('تعديل قسم')
                                        <button class="btn btn-sm btn btn-success" href="#editmodal" title="تعديل" data-id="{{ $one->id }}" data-section_name="{{ $one->section_name }}" data-description="{{ $one->description }}" data-toggle="modal">تعديل</button>
@@ -110,94 +114,101 @@
     </div>
     <!-- row closed -->
 
-        <!--Start Add Modal -->
-        <div class="modal fade" id="modaldemo8">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content modal-content-demo">
-                    <div class="modal-header">
-                        <h6 class="modal-title">اضافة قسم</h6>
-                        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{route('sections.store')}}" method="post" autocomplete="off">
-                            {{ csrf_field() }}
-                            <div class="form-group">
-                                <input type="hidden" name="id" id="id" value="">
-                                <label for="recipient-name" class="col-form-label">اسم القسم:</label>
-                                <input class="form-control" name="section_name" id="section_name" type="text">
-                            </div>
-                            <div class="form-group">
-                                <label for="message-text" class="col-form-label">ملاحظات:</label>
-                                <textarea class="form-control" id="description" name="description"></textarea>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">تاكيد</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
-                            </div>
-                        </form>
-                    </div>
+    <!--Start Add Modal -->
+    <div class="modal fade" id="modaldemo8">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-header">
+                    <h6 class="modal-title">اضافة قسم</h6>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
                 </div>
-            </div>
-        </div>
-        <!-- End Add Modal -->
-
-        <!--Start Edit Modal -->
-        <div class="modal fade" id="editmodal">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content modal-content-demo">
-                    <div class="modal-header">
-                        <h6 class="modal-title">تعديل القسم</h6>
-                        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="sections/update" method="post" autocomplete="off">
-                            {{method_field('patch')}}
-                            {{csrf_field()}}
-                            <div class="form-group">
-                                <input type="hidden" name="id" id="id" value="">
-                                <label for="recipient-name" class="col-form-label">اسم القسم:</label>
-                                <input class="form-control" name="section_name" id="section_name" type="text">
-                            </div>
-                            <div class="form-group">
-                                <label for="message-text" class="col-form-label">ملاحظات:</label>
-                                <textarea class="form-control" id="description" name="description"></textarea>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">تاكيد</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Edit Modal -->
-
-        {{--  Start Delete Modal  --}}
-                <div class="modal fade" id="modaldemo9">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content modal-content-demo">
-                            <div class="modal-header">
-                                <h6 class="modal-title">حذف القسم</h6>
-                                <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
-                            </div>
-                            <form action="sections/destroy" method="post">
-                                {{method_field('delete')}}
-                                {{csrf_field()}}
-                                <div class="modal-body">
-                                    <p>هل انت متاكد من عملية الحذف ؟</p><br>
-                                    <input type="hidden" name="id" id="id" value="">
-                                    <input class="form-control" name="section_name" id="section_name" type="text" readonly>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                                    <button type="submit" class="btn btn-danger">تاكيد</button>
-                                </div>
-                            </form>
+                <div class="modal-body">
+                    <form action="{{route('sections.store')}}" method="post" autocomplete="off">
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <input type="hidden" name="id" id="id" value="">
+                            <label for="recipient-name" class="col-form-label">اسم القسم:</label>
+                            <input class="form-control" name="section_name" id="section_name" type="text">
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">ملاحظات:</label>
+                            <textarea class="form-control" id="description" name="description"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">تاكيد</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+                        </div>
+                    </form>
                 </div>
-        {{--  End Delete Modal  --}}
+            </div>
+        </div>
+    </div>
+    <!-- End Add Modal -->
+
+    <!--Start Edit Modal -->
+    <div class="modal fade" id="editmodal">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-header">
+                    <h6 class="modal-title">تعديل القسم</h6>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <form action="sections/update" method="post" autocomplete="off">
+                        {{method_field('patch')}}
+                        {{csrf_field()}}
+                        <div class="form-group">
+                            <input type="hidden" name="id" id="id" value="">
+                            <label for="recipient-name" class="col-form-label">اسم القسم:</label>
+                            <input class="form-control" name="section_name" id="section_name" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">ملاحظات:</label>
+                            <textarea class="form-control" id="description" name="description"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">تاكيد</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Edit Modal -->
+
+    {{--  Start Delete Modal  --}}
+        <div class="modal fade" id="modaldemo9">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content modal-content-demo">
+                    <div class="modal-header">
+                        <h6 class="modal-title">حذف القسم</h6>
+                        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <form action="sections/destroy" method="post">
+                        {{method_field('delete')}}
+                        {{csrf_field()}}
+                        <div class="modal-body">
+                            <p>هل انت متاكد من عملية الحذف ؟</p><br>
+                            <input type="hidden" name="id" id="id" value="">
+                            <input class="form-control" name="section_name" id="section_name" type="text" readonly>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
+                            <button type="submit" class="btn btn-danger">تاكيد</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {{--  End Delete Modal  --}}
+
+    </div>
+    <!-- row closed -->
+    </div>
+    <!-- Container closed -->
+    </div>
+    <!-- main-content closed -->
 
 @endsection
 @section('js')

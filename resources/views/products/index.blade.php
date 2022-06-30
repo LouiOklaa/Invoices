@@ -24,17 +24,28 @@
 				<!-- breadcrumb -->
 @endsection
 @section('content')
+
     @if (session()->has('Add'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('Add') }}</strong>
+            <strong>&nbsp &nbsp &nbsp &nbsp{{ session()->get('Add') }}</strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
     @endif
+
     @if (session()->has('Edit'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('Edit') }}</strong>
+            <strong>&nbsp &nbsp &nbsp &nbsp{{ session()->get('Edit') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
+    @if (session()->has('Delete'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>&nbsp &nbsp &nbsp &nbsp{{ session()->get('Delete') }}</strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -51,23 +62,6 @@
         </div>
     @endif
 
-    @if (session()->has('ُEdit'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('Edit') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-
-    @if (session()->has('Delete'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('Delete') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
     <!-- row -->
     <div class="row">
         <!--div-->
@@ -101,7 +95,11 @@
                                     <td>{{$i}}</td>
                                     <td>{{$one->product_name}} </td>
                                     <td>{{$one->section->section_name}}</td>
-                                    <td>{{$one->description}}</td>
+                                    @if($one->description == NULL)
+                                        <td style="text-align: center; color: #BEC1C8">---</td>
+                                    @else
+                                        <td>{{$one->description}}</td>
+                                    @endif
                                     <td>
                                         @can('تعديل منتج')
                                            <button class="btn btn-sm btn btn-success" href="#edit_modal" title="تعديل" data-product_id="{{ $one->id }}" data-product_name="{{ $one->product_name }}" data-section_name="{{ $one->section->section_name }}" data-description="{{ $one->description }}" data-toggle="modal">تعديل</button>
@@ -230,6 +228,13 @@
         </div>
     </div>
     {{--  End Delete Modal  --}}
+
+    </div>
+    <!-- row closed -->
+    </div>
+    <!-- Container closed -->
+    </div>
+    <!-- main-content closed -->
 
 @endsection
 @section('js')

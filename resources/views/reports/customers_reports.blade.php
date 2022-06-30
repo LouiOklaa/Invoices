@@ -169,7 +169,11 @@
                                                 @endif
                                             @endif
                                         </td>
-                                        <td>{{$one->note}}</td>
+                                        @if($one->note == NULL)
+                                            <td style="text-align: center; color: #BEC1C8">---</td>
+                                        @else
+                                            <td style="text-align: center">{{$one->note}}</td>
+                                        @endif
                                     </tr>
                                 @endforeach
                                 </tbody>

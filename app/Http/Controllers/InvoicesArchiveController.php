@@ -85,7 +85,7 @@ class InvoicesArchiveController extends Controller
 
         $invoice = Invoices::withTrashed()->where('id', $request->invoice_id);
         $invoice->restore();
-        session()->flash('restore_invoice' , 'تم استعادة الفاتورة بنجاح');
+        session()->flash('Restore' , 'تم استعادة الفاتورة بنجاح');
         return redirect('/invoices');
 
     }

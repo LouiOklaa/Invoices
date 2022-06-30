@@ -31,9 +31,30 @@
 
 @section('content')
 
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
+    @if (session()->has('Add'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>&nbsp &nbsp &nbsp &nbsp{{ session()->get('Add') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
+    @if (session()->has('Edit'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>&nbsp &nbsp &nbsp &nbsp{{ session()->get('Edit') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
+    @if (session()->has('Delete'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>&nbsp &nbsp &nbsp &nbsp{{ session()->get('Delete') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     @endif
 
@@ -50,7 +71,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive hoverable-table">
-                        <table class="table table-hover" id="example1" data-page-length='50' style=" text-align: center;">
+                        <table class="table table-hover" id="example1" data-page-length='50' style="text-align: center;">
                             <thead>
                             <tr>
                                 <th class="wd-10p border-bottom-0">ID</th>
@@ -72,28 +93,27 @@
                                     <td>
                                         @if ($user->status == 'مفعل')
                                             <span class="label text-success d-flex">
-                                                <div class="dot-label bg-success ml-1"></div>{{ $user->status }}
+                                                <div class="dot-label bg-success ml-1" style="margin-top: -3px; margin-right: 90px;"></div>{{ $user->status }}
                                             </span>
                                         @else
                                             <span class="label text-danger d-flex">
-                                                <div class="dot-label bg-danger ml-1"></div>{{ $user->status }}
+                                                <div class="dot-label bg-danger ml-1" style="margin-top: -3.3px; margin-right: 90px;"></div>{{ $user->status }}
                                             </span>
                                         @endif
                                     </td>
-
                                     <td>
                                         @if (!empty($user->getRoleNames()))
                                             @foreach ($user->getRoleNames() as $v)
-                                                <label class="badge badge-success">{{ $v }}</label>
+                                                <label class="btn btn-sm btn-rounded btn-success">{{ $v }}</label>
                                             @endforeach
                                         @endif
                                     </td>
-
                                     <td>
                                         @can('تعديل مستخدم')
                                             <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-info"
                                                title="تعديل"><i class="las la-pen"></i></a>
                                         @endcan
+
 
                                         @can('حذف مستخدم')
                                             <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
