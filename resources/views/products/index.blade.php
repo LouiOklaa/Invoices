@@ -11,6 +11,8 @@
     <link href="{{URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/plugins/prism/prism.css')}}" rel="stylesheet">
+    <!--- Internal Select2 css-->
+    <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
 @endsection
 @section('page-header')
 				<!-- breadcrumb -->
@@ -70,7 +72,7 @@
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
                         @can('اضافة منتج')
-                           <a class="modal-effect btn btn-primary btn-block" data-effect="effect-scale" data-toggle="modal" href="#exampleModal"><i class="fas fa-plus"></i>&nbsp;اضافة منتج</a>
+                           <a class="modal-effect btn btn-rounded btn-primary btn-block" data-effect="effect-scale" data-toggle="modal" href="#exampleModal"><i class="fas fa-plus"></i>&nbsp;اضافة منتج</a>
                         @endcan
                     </div>
                 </div>
@@ -102,10 +104,10 @@
                                     @endif
                                     <td>
                                         @can('تعديل منتج')
-                                           <button class="btn btn-sm btn btn-success" href="#edit_modal" title="تعديل" data-product_id="{{ $one->id }}" data-product_name="{{ $one->product_name }}" data-section_name="{{ $one->section->section_name }}" data-description="{{ $one->description }}" data-toggle="modal">تعديل</button>
+                                           <button class="btn btn-rounded btn-sm btn btn-info" href="#edit_modal" title="تعديل" data-product_id="{{ $one->id }}" data-product_name="{{ $one->product_name }}" data-section_name="{{ $one->section->section_name }}" data-description="{{ $one->description }}" data-toggle="modal">تعديل</button>
                                         @endcan
                                         @can('حذف منتج')
-                                           <button class="btn btn-sm btn btn-danger" data-product_id="{{ $one->id }}" title="حذف" data-product_name="{{ $one->product_name }}" href="#delete_modal" data-toggle="modal">حذف</button>
+                                           <button class="btn btn-rounded btn-sm btn btn-danger" data-product_id="{{ $one->id }}" title="حذف" data-product_name="{{ $one->product_name }}" href="#delete_modal" data-toggle="modal">حذف</button>
                                         @endcan
                                     </td>
                                 </tr>
@@ -138,8 +140,8 @@
                             <input type="text" class="form-control" id="product_name" name="product_name" value="">
                         </div>
                         <label class="my-1 mr-2" for="inlineFormCustomSelectPref">القسم</label>
-                        <select name="section_id" id="section_id" class="form-control">
-                            <option value="" selected disabled> -- حدد القسم --</option>
+                        <select name="section_id" id="section_id" class="form-control select2">
+                            <option value="#" selected disabled> -- حدد القسم --</option>
                             @foreach ($sections as $one)
                                 <option value="{{ $one->id }}">{{ $one->section_name }}</option>
                             @endforeach
@@ -151,8 +153,8 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">تاكيد</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+                        <button type="submit" class="btn btn-rounded btn-primary">تاكيد</button>
+                        <button type="button" class="btn btn-rounded btn-secondary" data-dismiss="modal">اغلاق</button>
                     </div>
                 </form>
             </div>
@@ -181,11 +183,11 @@
                                 <input type="text" class="form-control" id="product_name" name="product_name">
                             </div>
                             <label class="my-1 mr-2" for="inlineFormCustomSelectPref">القسم</label>
-                            <select name="section_name" id="section_name" class="form-control">
+                            <select name="section_name" id="section_name" class="form-control select2">
                                 @foreach ($sections as $one)
                                     <option> {{$one->section_name}} </option>
                                 @endforeach
-                            </select>
+                            </select><br>
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1">ملاحظات</label>
                                 <textarea class="form-control" id="description" name="description" rows="3"></textarea>
@@ -193,8 +195,8 @@
 
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-success">تعديل</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+                            <button type="submit" class="btn btn-rounded btn-primary">تاكيد</button>
+                            <button type="button" class="btn btn-rounded btn-secondary" data-dismiss="modal">اغلاق</button>
                         </div>
                     </form>
                 </div>
@@ -220,8 +222,8 @@
                         <input class="form-control" name="product_name" id="product_name" type="text" readonly>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                        <button type="submit" class="btn btn-danger">تاكيد</button>
+                        <button type="submit" class="btn btn-rounded btn-danger">تاكيد</button>
+                        <button type="button" class="btn btn-rounded btn-secondary" data-dismiss="modal">الغاء</button>
                     </div>
                 </form>
             </div>
@@ -263,6 +265,9 @@
     <script src="{{ URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js') }}"></script>
     <!-- Internal Select2 js-->
     <script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
+    <!--Internal  Form-elements js-->
+    <script src="{{ URL::asset('assets/js/advanced-form-elements.js') }}"></script>
+    <script src="{{ URL::asset('assets/js/select2.js') }}"></script>
     <!-- Internal Modal js-->
     <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
     {{--  Edit Modal Script  --}}

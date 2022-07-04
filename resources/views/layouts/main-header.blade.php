@@ -3,10 +3,10 @@
 				<div class="container-fluid">
 					<div class="main-header-left ">
 						<div class="responsive-logo">
-							<a href="{{ url('/' . $page='index') }}"><img src="{{URL::asset('assets/img/brand/logo.png')}}" class="logo-1" alt="logo"></a>
-							<a href="{{ url('/' . $page='index') }}"><img src="{{URL::asset('assets/img/brand/logo-white.png')}}" class="dark-logo-1" alt="logo"></a>
-							<a href="{{ url('/' . $page='index') }}"><img src="{{URL::asset('assets/img/brand/favicon.png')}}" class="logo-2" alt="logo"></a>
-							<a href="{{ url('/' . $page='index') }}"><img src="{{URL::asset('assets/img/brand/favicon.png')}}" class="dark-logo-2" alt="logo"></a>
+							<a href="{{ url('/' . $page='home') }}"><img src="{{URL::asset('assets/img/brand/logo.png')}}" class="logo-1" alt="logo"></a>
+							<a href="{{ url('/' . $page='home') }}"><img src="{{URL::asset('assets/img/brand/logo-white.png')}}" class="dark-logo-1" alt="logo"></a>
+							<a href="{{ url('/' . $page='home') }}"><img src="{{URL::asset('assets/img/brand/favicon.png')}}" class="logo-2" alt="logo"></a>
+							<a href="{{ url('/' . $page='home') }}"><img src="{{URL::asset('assets/img/brand/favicon.png')}}" class="dark-logo-2" alt="logo"></a>
 						</div>
 						<div class="app-sidebar__toggle" data-toggle="sidebar">
 							<a class="open-toggle" href="#"><i class="header-icon fe fe-align-left" ></i></a>
@@ -26,8 +26,8 @@
                                 <div class="dropdown nav-item main-header-notification" title="الاشعارات">
                                     <a class="new nav-link" href="#">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg><span class=" pulse"></span></a>
-                                    <div class="dropdown-menu">
-                                        <div class="menu-header-content bg-primary text-right">
+                                    <div class="dropdown-menu" style="width: 400px">
+                                        <div class="menu-header-content bg-primary-gradient text-right">
                                             <div class="d-flex">
                                                 <h6 class="dropdown-title mb-1 tx-15 text-white font-weight-semibold">الاشعارات</h6>
                                                 <span class="badge badge-pill badge-warning mr-auto my-auto float-left" ><a href="\MarkAsRead_All"> تميز الكل كمقروء</a></span>
@@ -35,17 +35,16 @@
                                             <p class="dropdown-title-text subtext mb-0 text-white op-6 pb-0 tx-12 " id="notifications_count">لديك {{ auth()->user()->unreadNotifications->count() }} اشعارات غير مقروءة</p>
                                         </div>
 
-
-                                        <div id="unreadNotifications">
+                                        <div id="unreadNotifications" class="chat-scroll">
                                             @foreach (auth()->user()->unreadNotifications as $one)
                                                 <div class="main-notification-list Notification-scroll">
-                                                    <a class="d-flex p-3 border-bottom" href="{{ url('InvoicesDetails') }}/{{ $one->data['id'] }}">
-                                                        <div class="notifyimg bg-success">
-                                                            <i class="la la-shopping-basket text-white"></i>
+                                                    <a class="d-flex p-3 border-bottom" href="/MarkAsRead" >
+                                                        <div class="notifyimg bg-info-gradient">
+                                                            <i class="la la-envelope-open  text-white"></i>
                                                         </div>
                                                         <div class="mr-3">
                                                             <h5 class="notification-label mb-1">{{ $one->data['title'] }}{{ $one->data['user'] }}</h5>
-                                                            <div class="notification-subtext">1 hour ago</div>
+                                                            <div class="notification-subtext">تمت الاضافة بتاريخ : {{$one->created_at->format('d/m/Y')}}</div>
                                                         </div>
                                                         <div class="mr-auto" >
                                                             <i class="las la-angle-left text-left text-muted"></i>
@@ -56,7 +55,7 @@
                                         </div>
 
                                         <div class="dropdown-footer">
-                                            <a href="">VIEW ALL</a>
+                                            <a href="{{route('All_Notifications')}}">عرض الجميع</a>
                                         </div>
                                     </div>
                                 </div>
@@ -75,11 +74,16 @@
 											</div>
 										</div>
 									</div>
-									<a class="dropdown-item" href=""><i class="bx bx-user-circle"></i>Profile</a>
-									<a class="dropdown-item" href=""><i class="bx bx-cog"></i> Edit Profile</a>
-									<a class="dropdown-item" href=""><i class="bx bxs-inbox"></i>Inbox</a>
-									<a class="dropdown-item" href=""><i class="bx bx-envelope"></i>Messages</a>
-									<a class="dropdown-item" href=""><i class="bx bx-slider-alt"></i> Account Settings</a>
+									<a class="dropdown-item" href="{{route('profile')}}"><i class="bx bx-user-circle"></i>الملف الشخصي</a>
+                                    @can('تعديل مستخدم')
+									   <a class="dropdown-item" href="{{ route('users.edit', Auth::user()->id) }}"><i class="bx bx-cog"></i> تعديل الملف الشخصي</a>
+                                    @endcan
+                                    @can('الاشعارات')
+									   <a class="dropdown-item" href="{{route('All_Notifications')}}"><i class="bx bx-envelope"></i>الاشعارات</a>
+                                    @endcan
+                                    @can('عرض صلاحية')
+									   <a class="dropdown-item" href="{{ route('roles.show', Auth::user()->id) }}"><i class="bx bx-slider-alt"></i> صلاحيات الحساب</a>
+                                    @endcan
                                     <a class="dropdown-item" href="{{ route('logout') }}"onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="bx bx-log-out"></i>تسجيل خروج</a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf

@@ -54,7 +54,7 @@
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
                         @can('تصدير EXCEL')
-                            <a class="modal-effect btn btn-success btn-block" href="{{ url('Export_Invoices') }}/{{ 5 }}">
+                            <a class="modal-effect btn btn-rounded btn-success btn-block" href="{{ url('Export_Invoices') }}/{{ 5 }}">
                                 <i class="fas fa-file-download"></i>&nbsp; تصدير EXCEL</a>
                         @endcan
                     </div>
@@ -156,8 +156,8 @@
                         <input class="form-control" name="invoice_number" id="invoice_number" type="text" readonly>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                        <button type="submit" class="btn btn-danger">تاكيد</button>
+                        <button type="submit" class="btn btn-rounded btn-danger">تاكيد</button>
+                        <button type="button" class="btn btn-rounded btn-secondary" data-dismiss="modal">الغاء</button>
                     </div>
                 </form>
             </div>
@@ -185,8 +185,8 @@
                         <input class="form-control" name="invoice_number" id="invoice_number" type="text" readonly>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                        <button type="submit" class="btn btn-primary">تاكيد</button>
+                        <button type="submit" class="btn btn-rounded btn-primary">تاكيد</button>
+                        <button type="button" class="btn btn-rounded btn-secondary" data-dismiss="modal">الغاء</button>
                     </div>
                 </form>
             </div>

@@ -61,11 +61,11 @@
     <!-- row opened -->
     <div class="row row-sm">
         <div class="col-xl-12">
-            <div class="card">
+            <div class="card mg-b-20">
                 <div class="card-header pb-0">
-                    <div class="col-sm-1 col-md-2">
+                    <div class="d-flex justify-content-between">
                         @can('اضافة مستخدم')
-                            <a class="btn btn-primary btn-sm" href="{{ route('users.create') }}">اضافة مستخدم</a>
+                            <a class="btn btn-rounded btn-primary btn-block" href="{{ route('users.create') }}"><i class="fas fa-plus"></i>&nbsp; اضافة مستخدم</a>
                         @endcan
                     </div>
                 </div>
@@ -87,7 +87,11 @@
                                 <tr>
                                     <td>{{ ++$i }}</td>
                                     <td>
-                                        <a href="{{ url('users') }}/{{ $user->id }}">{{$user->name}}</a>
+                                        <a
+                                            @can('عرض معلومات المستخدم')
+                                             href="{{ url('users') }}/{{ $user->id }}"
+                                            @endcan
+                                        >{{$user->name}}</a>
                                     </td>
                                     <td>{{ $user->email }}</td>
                                     <td>
@@ -104,22 +108,16 @@
                                     <td>
                                         @if (!empty($user->getRoleNames()))
                                             @foreach ($user->getRoleNames() as $v)
-                                                <label class="btn btn-sm btn-rounded btn-success">{{ $v }}</label>
+                                                <label class="btn btn-sm btn-rounded btn-dark-gradient">{{ $v }}</label>
                                             @endforeach
                                         @endif
                                     </td>
                                     <td>
                                         @can('تعديل مستخدم')
-                                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-info"
-                                               title="تعديل"><i class="las la-pen"></i></a>
+                                            <a class="btn btn-rounded btn-sm btn btn-info" href="{{ route('users.edit', $user->id) }}" title="تعديل">تعديل</a>
                                         @endcan
-
-
                                         @can('حذف مستخدم')
-                                            <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-                                               data-user_id="{{ $user->id }}" data-username="{{ $user->name }}"
-                                               data-toggle="modal" href="#modaldemo8" title="حذف"><i
-                                                    class="las la-trash"></i></a>
+                                            <button class="btn btn-rounded btn-sm btn btn-danger" data-user_id="{{ $user->id }}" data-username="{{ $user->name }}" href="#delete_modal" data-toggle="modal">حذف</button>
                                         @endcan
                                     </td>
                                 </tr>
@@ -133,7 +131,7 @@
         <!--/div-->
 
         <!-- Modal effects -->
-        <div class="modal" id="modaldemo8">
+        <div class="modal" id="delete_modal">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content modal-content-demo">
                     <div class="modal-header">
@@ -149,8 +147,8 @@
                             <input class="form-control" name="username" id="username" type="text" readonly>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                            <button type="submit" class="btn btn-danger">تاكيد</button>
+                            <button type="submit" class="btn btn-rounded btn-danger">تاكيد</button>
+                            <button type="button" class="btn btn-rounded btn-secondary" data-dismiss="modal">الغاء</button>
                         </div>
                 </div>
                 </form>
@@ -185,7 +183,7 @@
     <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
 
     <script>
-        $('#modaldemo8').on('show.bs.modal', function(event) {
+        $('#delete_modal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var user_id = button.data('user_id')
             var username = button.data('username')

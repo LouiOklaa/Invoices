@@ -23,6 +23,8 @@ class Invoices extends Model
         'status',
         'value_status',
         'note',
+        'created_by',
+        'archived_by',
         'payment_date',
     ];
 

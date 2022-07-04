@@ -53,7 +53,13 @@ class RoleController extends Controller
         $this->validate($request, [
 
             'name' => 'required|unique:roles,name',
-            'permission' => 'required',
+            'permission' => 'required'
+
+        ],[
+
+            'name.required' => 'يرجى ادخال اسم الصلاحية',
+            'name.unique' => 'اسم الصلاحية موجود مسبقا',
+            'permission.required' => 'يرجى تحديد صلاحية واحدة على الاقل'
 
         ]);
 
@@ -103,8 +109,14 @@ class RoleController extends Controller
     {
         $this->validate($request, [
 
-            'name' => 'required',
-            'permission' => 'required',
+            'name' => 'required|unique:roles,name,'.$id,
+            'permission' => 'required'
+
+        ],[
+
+            'name.required' => 'يرجى ادخال اسم الصلاحية',
+            'name.unique' => 'اسم الصلاحية موجود مسبقا',
+            'permission.required' => 'يرجى تحديد صلاحية واحدة على الاقل'
 
         ]);
 

@@ -13,11 +13,24 @@
                     تغير حالة الدفع</span>
             </div>
         </div>
-
+        <div class="mb-3 mb-xl-0">
+            <a class="btn btn-danger-gradient btn-rounded btn-sm" href="{{ url()->previous() }}">رجوع</a>
+        </div>
     </div>
     <!-- breadcrumb -->
 @endsection
 @section('content')
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <!-- row -->
     <div class="row">
         <div class="col-lg-12 col-md-12">
@@ -111,7 +124,7 @@
                             <div class="col">
                                 <label for="exampleTextarea">حالة الدفع</label>
                                 <select class="form-control" id="status" name="status" required>
-                                    <option selected="true" disabled="disabled">-- حدد حالة الدفع --</option>
+                                    <option selected="true" disabled="disabled">حدد حالة الدفع</option>
                                     <option value="مدفوعة">مدفوعة</option>
                                     <option value="مدفوعة جزئيا">مدفوعة جزئيا</option>
                                 </select>
@@ -120,7 +133,7 @@
                             <div class="col">
                                 <label>تاريخ الدفع</label>
                                 <input class="form-control fc-datepicker" id="payment_date" name="payment_date" placeholder="YYYY-MM-DD" value="{{ date('Y-m-d') }}"
-                                       type="text" required>
+                                       type="text">
                             </div>
 
 

@@ -98,4 +98,5 @@ class HomeController extends Controller
         return view('home', compact('chartjs' , 'chartjs_2'));
 
     }
+
 }

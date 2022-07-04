@@ -52,12 +52,23 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, [
 
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
             'roles_name' => 'required'
+
+        ],[
+
+            'name.required' => 'يرجى ادخال اسم المستخدم',
+            'email.required' => 'يرجى ادخال البريد الالكتروني',
+            'email.email' => 'البريد الالكتروني يجب ان يكون من الشكل : exampel@exampel.com',
+            'email.unique' => 'البريد الالكتروني موجود مسبقا',
+            'password.required' =>'يرجى ادخال كلمة المرور',
+            'password.same' =>'كلمات المرور غير متطابقين',
+            'roles_name.required' =>'يرجى اختيار صلاحية واحدة ع الاقل',
 
         ]);
 
@@ -106,8 +117,18 @@ class UserController extends Controller
 
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
-            'password' => 'same:confirm-password',
+            'password' => 'required|same:confirm-password',
             'roles_name' => 'required'
+
+        ],[
+
+            'name.required' => 'يرجى ادخال اسم المستخدم',
+            'email.required' => 'يرجى ادخال البريد الالكتروني',
+            'email.email' => 'البريد الالكتروني يجب ان يكون من الشكل : exampel@exampel.com',
+            'email.unique' => 'البريد الالكتروني موجود مسبقا',
+            'password.required' =>'يرجى ادخال كلمة المرور',
+            'password.same' =>'كلمات المرور غير متطابقين',
+            'roles_name.required' =>'يرجى اختيار صلاحية واحدة ع الاقل',
 
         ]);
 
@@ -143,5 +164,11 @@ class UserController extends Controller
 
         session()->flash('Delete','تم حذف المستخدم بنجاح');
         return redirect()->route('users.index');
+    }
+
+    public function profile (){
+
+        return view('users.profile');
+
     }
 }

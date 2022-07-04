@@ -61,7 +61,7 @@ class AddInvoice extends Notification
         return [
 
             'id'=> $this->InvoiceID,
-            'title'=>'تم اضافة فاتورة جديد بواسطة :',
+            'title'=>' تم اضافة فاتورة جديد بواسطة : ',
             'user'=> Auth::user()->name,
 
         ];

@@ -25,7 +25,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('invoices', 'InvoicesController');
 Route::resource('InvoiceAttachments', 'InvoicesAttachmentsController');
 Route::get("section/{id}" , 'InvoicesController@get_products');
-Route::get("InvoicesDetails/{id}" , 'InvoicesDetailsController@show');
+Route::get("InvoicesDetails/{id}" , 'InvoicesDetailsController@show')->name('InvoicesDetails');
 Route::get("View_file/{invoice_number}/{file_name}" , 'InvoicesDetailsController@view_file');
 Route::get("Download_file/{invoice_number}/{file_name}" , 'InvoicesDetailsController@download_file');
 Route::post('Delete_file', 'InvoicesDetailsController@destroy')->name('Delete_file');
@@ -43,14 +43,19 @@ Route::post('Search_Invoices' , 'InvoicesReportsController@search_invoices');
 Route::get('Customers_Reports' , 'CustomersReportsController@index');
 Route::post('Search_Customers' , 'CustomersReportsController@search_customers');
 Route::get('MarkAsRead_All','InvoicesController@MarkAsRead_All')->name('MarkAsRead_All');
+Route::get('MarkAsRead','InvoicesController@MarkAsRead')->name('MarkAsRead');
+Route::get('All_Notifications' , 'InvoicesController@View_All_Notification')->name('All_Notifications');
 
 Route::resource('sections', 'SectionsController');
 
 Route::resource('products', 'ProductsController');
 
+
+
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles','RoleController');
     Route::resource('users','UserController');
+    Route::get('profile' , 'UserController@profile')->name('profile');
 });
 
 Route::get('/{page}', 'AdminController@index');

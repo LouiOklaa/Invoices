@@ -72,11 +72,11 @@
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
                         @can('اضافة فاتورة')
-                            <a class="modal-effect btn btn-primary btn-block" href="invoices/create">
+                            <a class="modal-effect btn btn-rounded btn-primary btn-block" href="invoices/create">
                                 <i class="fas fa-plus"></i>&nbsp; اضافة فاتورة</a>
                         @endcan
                             @can('تصدير EXCEL')
-                                <a class="modal-effect btn btn-success" href="{{ url('Export_Invoices') }}/{{ 4 }}"
+                                <a class="modal-effect btn btn-rounded btn-success" href="{{ url('Export_Invoices') }}/{{ 4 }}"
                                    style="color:white; width: 170px; height: 40px; margin-right: 10px;"><i class="fas fa-file-download"></i>&nbsp &nbsp;تصدير EXCEL</a>
                             @endcan
                     </div>
@@ -185,8 +185,8 @@
                         <input class="form-control" name="invoice_number" id="invoice_number" type="text" readonly>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                        <button type="submit" class="btn btn-danger">تاكيد</button>
+                        <button type="submit" class="btn btn-rounded btn-danger">تاكيد</button>
+                        <button type="button" class="btn btn-rounded btn-secondary" data-dismiss="modal">الغاء</button>
                     </div>
                 </form>
             </div>
@@ -216,8 +216,8 @@
                         <input class="form-control" name="invoice_number" id="invoice_number" type="text" readonly>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                        <button type="submit" class="btn btn-primary">تاكيد</button>
+                        <button type="submit" class="btn btn-rounded btn-primary">تاكيد</button>
+                        <button type="button" class="btn btn-rounded btn-secondary" data-dismiss="modal">الغاء</button>
                     </div>
                 </form>
             </div>

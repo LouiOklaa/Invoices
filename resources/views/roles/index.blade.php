@@ -56,7 +56,7 @@
                         <div class="col-lg-12 margin-tb">
                             <div class="pull-right">
                                 @can('اضافة صلاحية')
-                                    <a class="btn btn-primary btn-sm" href="{{ route('roles.create') }}">اضافة</a>
+                                    <a class="btn btn-rounded btn-primary btn-block" href="{{ route('roles.create') }}"><i class="fas fa-plus"></i>&nbsp; اضافة صلاحية</a>
                                 @endcan
                             </div>
                         </div>
@@ -83,22 +83,18 @@
                                     <td>{{ $role->name }}</td>
                                     <td>
                                         @can('عرض صلاحية')
-                                            <a class="btn btn-success btn-sm"
+                                            <a class="btn btn-rounded btn-success btn-sm"
                                                href="{{ route('roles.show', $role->id) }}">عرض</a>
                                         @endcan
 
                                         @can('تعديل صلاحية')
-                                            <a class="btn btn-primary btn-sm"
+                                            <a class="btn btn-rounded btn-info btn-sm"
                                                href="{{ route('roles.edit', $role->id) }}">تعديل</a>
                                         @endcan
 
                                         @if ($role->name !== 'owner')
                                             @can('حذف صلاحية')
-{{--                                                {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy',--}}
-{{--                                                $role->id], 'style' => 'display:inline']) !!}--}}
-{{--                                                {!! Form::submit('حذف', ['class' => 'btn btn-danger btn-sm']) !!}--}}
-{{--                                                {!! Form::close() !!}--}}
-                                                    <button class="btn btn-sm btn btn-danger" data-role_id="{{ $role->id }}" title="حذف" data-role_name="{{ $role->name }}" href="#delete_modal" data-toggle="modal">حذف</button>
+                                                <button class="btn btn-rounded btn-sm btn btn-danger" data-role_id="{{ $role->id }}" title="حذف" data-role_name="{{ $role->name }}" href="#delete_modal" data-toggle="modal">حذف</button>
                                             @endcan
                                         @endif
                                     </td>
@@ -129,8 +125,8 @@
                             <input class="form-control" name="role_name" id="role_name" type="text" readonly>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                            <button type="submit" class="btn btn-danger">تاكيد</button>
+                            <button type="submit" class="btn btn-rounded btn-danger">تاكيد</button>
+                            <button type="button" class="btn btn-rounded btn-secondary" data-dismiss="modal">الغاء</button>
                         </div>
                     </form>
                 </div>

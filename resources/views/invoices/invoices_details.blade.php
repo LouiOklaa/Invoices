@@ -19,7 +19,9 @@
                     تفاصيل الفاتورة</span>
             </div>
         </div>
-
+        <div class="mb-3 mb-xl-0">
+            <a class="btn btn-danger-gradient btn-rounded btn-sm" href="{{ url()->previous() }}">رجوع</a>
+        </div>
     </div>
     <!-- breadcrumb -->
 @endsection
@@ -212,7 +214,7 @@
                                                                    <label class="custom-file-label" for="customFile">حدد
                                                                        المرفق</label>
                                                                </div><br><br>
-                                                               <button type="submit" class="btn btn-primary btn-sm "
+                                                               <button type="submit" class="btn btn-rounded btn-primary btn-sm "
                                                                        name="uploadedFile">تاكيد</button>
                                                            </form>
                                                         @endcan
@@ -242,13 +244,13 @@
                                                                 <td>{{$one->created_at}}</td>
                                                                 <td colspan="2">
                                                                     @can('عرض مرفق')
-                                                                        <a class="btn btn-success btn-sm" style="color: white;" href="{{ url('View_file') }}/{{ $invoices->invoice_number }}/{{ $one->file_name }}" role="button"><i class="fas fa-eye"></i>&nbsp;عرض</a>
+                                                                        <a class="btn btn-rounded btn-success btn-sm" style="color: white;" href="{{ url('View_file') }}/{{ $invoices->invoice_number }}/{{ $one->file_name }}" role="button">عرض</a>
                                                                     @endcan
                                                                     @can('تحميل مرفق')
-                                                                       <a class="btn btn-info btn-sm" style="color: white;" href="{{ url('Download_file') }}/{{ $invoices->invoice_number }}/{{ $one->file_name }}" role="button"><i class="fas fa-download"></i>&nbsp;تحميل</a>
+                                                                       <a class="btn btn-rounded btn-info btn-sm" style="color: white;" href="{{ url('Download_file') }}/{{ $invoices->invoice_number }}/{{ $one->file_name }}" role="button">تحميل</a>
                                                                     @endcan
                                                                     @can('حذف مرفق')
-                                                                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-file_name="{{ $one->file_name }}" data-invoice_number="{{ $one->invoice_number }}" data-id_file="{{ $one->id }}" data-target="#delete_file">حذف</button>
+                                                                        <button class="btn btn-rounded btn-danger btn-sm" data-toggle="modal" data-file_name="{{ $one->file_name }}" data-invoice_number="{{ $one->invoice_number }}" data-id_file="{{ $one->id }}" data-target="#delete_file">حذف</button>
                                                                     @endcan
                                                                 </td>
                                                             </tr>
@@ -291,8 +293,8 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                        <button type="submit" class="btn btn-danger">تاكيد</button>
+                        <button type="submit" class="btn btn-rounded btn-danger">تاكيد</button>
+                        <button type="button" class="btn btn-rounded btn-secondary" data-dismiss="modal">الغاء</button>
                     </div>
                 </form>
             </div>

@@ -20,7 +20,9 @@
                     معاينة طباعة الفاتورة</span>
             </div>
         </div>
-
+        <div class="mb-3 mb-xl-0">
+            <a class="btn btn-danger-gradient btn-rounded btn-sm" href="{{ route('invoices.index') }}">رجوع</a>
+        </div>
     </div>
     <!-- breadcrumb -->
 @endsection

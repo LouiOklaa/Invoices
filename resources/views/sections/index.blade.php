@@ -67,7 +67,7 @@
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
                         @can('اضافة قسم')
-                           <a class="modal-effect btn btn-primary btn-block" data-effect="effect-scale" data-toggle="modal" href="#modaldemo8"><i class="fas fa-plus"></i>&nbsp;اضافة قسم</a>
+                           <a class="modal-effect btn btn-rounded btn-primary btn-block" data-effect="effect-scale" data-toggle="modal" href="#add_modal"><i class="fas fa-plus"></i>&nbsp;اضافة قسم</a>
                         @endcan
                     </div>
                 </div>
@@ -96,10 +96,10 @@
                                 @endif
                                 <td>
                                     @can('تعديل قسم')
-                                       <button class="btn btn-sm btn btn-success" href="#editmodal" title="تعديل" data-id="{{ $one->id }}" data-section_name="{{ $one->section_name }}" data-description="{{ $one->description }}" data-toggle="modal">تعديل</button>
+                                       <button class="btn btn-rounded btn-sm btn btn-info" href="#editmodal" title="تعديل" data-id="{{ $one->id }}" data-section_name="{{ $one->section_name }}" data-description="{{ $one->description }}" data-toggle="modal">تعديل</button>
                                     @endcan
                                     @can('حذف قسم')
-                                       <button class="btn btn-sm btn btn-danger" data-id="{{ $one->id }}" title="حذف" data-section_name="{{ $one->section_name }}" href="#modaldemo9" data-toggle="modal">حذف</button>
+                                       <button class="btn btn-rounded btn-sm btn btn-danger" data-id="{{ $one->id }}" title="حذف" data-section_name="{{ $one->section_name }}" href="#modaldemo9" data-toggle="modal">حذف</button>
                                     @endcan
                                 </td>
                             </tr>
@@ -115,7 +115,7 @@
     <!-- row closed -->
 
     <!--Start Add Modal -->
-    <div class="modal fade" id="modaldemo8">
+    <div class="modal fade" id="add_modal">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content modal-content-demo">
                 <div class="modal-header">
@@ -131,12 +131,12 @@
                             <input class="form-control" name="section_name" id="section_name" type="text">
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="col-form-label">ملاحظات:</label>
-                            <textarea class="form-control" id="description" name="description"></textarea>
+                            <label for="exampleFormControlTextarea1">ملاحظات</label>
+                            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">تاكيد</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+                            <button type="submit" class="btn btn-rounded btn-primary">تاكيد</button>
+                            <button type="button" class="btn btn-rounded btn-secondary" data-dismiss="modal">اغلاق</button>
                         </div>
                     </form>
                 </div>
@@ -167,8 +167,8 @@
                             <textarea class="form-control" id="description" name="description"></textarea>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">تاكيد</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+                            <button type="submit" class="btn btn-rounded btn-primary">تاكيد</button>
+                            <button type="button" class="btn btn-rounded btn-secondary" data-dismiss="modal">اغلاق</button>
                         </div>
                     </form>
                 </div>
@@ -194,8 +194,8 @@
                             <input class="form-control" name="section_name" id="section_name" type="text" readonly>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                            <button type="submit" class="btn btn-danger">تاكيد</button>
+                            <button type="submit" class="btn btn-rounded btn-danger">تاكيد</button>
+                            <button type="button" class="btn btn-rounded btn-secondary" data-dismiss="modal">الغاء</button>
                         </div>
                     </form>
                 </div>

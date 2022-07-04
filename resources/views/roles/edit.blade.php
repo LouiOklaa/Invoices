@@ -17,17 +17,16 @@
                 الصلاحيات</span>
             </div>
         </div>
+        <div class="mb-3 mb-xl-0">
+            <a class="btn btn-danger-gradient btn-rounded btn-sm" href="{{ url()->previous() }}">رجوع</a>
+        </div>
     </div>
     <!-- breadcrumb -->
 @endsection
 @section('content')
 
-    @if (count($errors) > 0)
+    @if ($errors->any())
         <div class="alert alert-danger">
-            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <strong>خطا</strong>
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>

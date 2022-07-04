@@ -76,12 +76,10 @@
                                     <option value="{{ $invoices_type ?? 'حدد نوع الفواتير' }}" selected>
                                         {{ $invoices_type ?? 'حدد نوع الفواتير' }}
                                     </option>
-
                                     <option value="كل الفواتير">كل الفواتير</option>
                                     <option value="مدفوعة">الفواتير المدفوعة</option>
                                     <option value="غير مدفوعة">الفواتير الغير مدفوعة</option>
                                     <option value="مدفوعة جزئيا">الفواتير المدفوعة جزئيا</option>
-
                                 </select>
                             </div><!-- col-4 -->
 

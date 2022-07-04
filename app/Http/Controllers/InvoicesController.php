@@ -34,6 +34,7 @@ class InvoicesController extends Controller
         $this->middleware('permission:الفواتير المدفوعة جزئيا', ['only' => ['partial_invoices']]);
         $this->middleware('permission:طباعةالفاتورة', ['only' => ['print_invoice']]);
         $this->middleware('permission:تصدير EXCEL', ['only' => ['export']]);
+        $this->middleware('permission:الاشعارات', ['only' => ['View_All_Notification' , 'MarkAsRead_All' , 'MarkAsRead']]);
     }
 
     /**
@@ -68,6 +69,31 @@ class InvoicesController extends Controller
     {
         $section_name = Sections::where('id' , '=' , $request->section)->first();
 
+        $this->validate($request, [
+
+            'invoice_number' => 'required|max:255|unique:invoices',
+            'invoice_Date' => 'required',
+            'due_date' => 'required',
+            'section' => 'required',
+            'product' => 'required',
+            'amount_collection' => 'required',
+            'amount_commission' => 'required',
+            'discount' => 'required',
+            'value_VAT' => 'required'
+        ],[
+
+            'invoice_number.required' =>'يرجى ادخال رقم الفاتورة',
+            'invoice_number.unique' => 'رقم الفاتورة موجود مسبقا',
+            'invoice_Date.required' =>'يرجى ادخال تاريخ الفاتورة',
+            'due_date.required' =>'يرجى ادخال تاريخ استحقاق الفاتورة',
+            'section.required' =>'يرجى ادخال اسم القسم',
+            'product.required' =>'يرجى ادخال اسم المنتج',
+            'amount_collection.required' =>'يرجى ادخال مبلغ التحصيل',
+            'amount_commission.required' =>'يرجى ادخال مبلغ العمولة',
+            'discount.required' =>'يرجى ادخال قيمة الخصم',
+            'value_VAT.required' =>'يرجى ادخال قيمة الضريبة المضافة'
+        ]);
+
         Invoices::create([
 
            'invoice_number' => $request->invoice_number,
@@ -85,6 +111,7 @@ class InvoicesController extends Controller
            'status' => 'غير مدفوعة',
            'value_status' => 2,
            'note' => $request->note,
+           'created_by' => Auth::user()->name
 
         ]);
 
@@ -98,7 +125,7 @@ class InvoicesController extends Controller
             'status' => 'غير مدفوعة',
             'value_status' => 2,
             'note' => $request->note,
-            'user' => (Auth::user()->name),
+            'user' => (Auth::user()->name)
 
         ]);
 
@@ -165,6 +192,38 @@ class InvoicesController extends Controller
     public function update(Request $request)
     {
         $invoices = Invoices::findOrFail($request->invoice_id);
+
+        $this->validate($request, [
+
+            'invoice_number' => 'required|max:255|unique:invoices,invoice_number,'.$request->invoice_id,
+            'invoice_Date' => 'required',
+            'due_date' => 'required',
+            'section' => 'required',
+            'product' => 'required',
+            'amount_collection' => 'required',
+            'amount_commission' => 'required',
+            'discount' => 'required',
+            'value_VAT' => 'required'
+        ],[
+
+            'invoice_number.required' =>'يرجى ادخال رقم الفاتورة',
+            'invoice_number.unique' => 'رقم الفاتورة موجود مسبقا',
+            'invoice_Date.required' =>'يرجى ادخال تاريخ الفاتورة',
+            'due_date.required' =>'يرجى ادخال تاريخ استحقاق الفاتورة',
+            'section.required' =>'يرجى ادخال اسم القسم',
+            'product.required' =>'يرجى ادخال اسم المنتج',
+            'amount_collection.required' =>'يرجى ادخال مبلغ التحصيل',
+            'amount_commission.required' =>'يرجى ادخال مبلغ العمولة',
+            'discount.required' =>'يرجى ادخال قيمة الخصم',
+            'value_VAT.required' =>'يرجى ادخال قيمة الضريبة المضافة'
+        ]);
+
+        if ($request->invoice_number != 'invoice_number'){
+
+            rename(public_path('Attachments/' . $invoices->invoice_number) , public_path('Attachments/' . $request->invoice_number));
+
+        }
+
         $invoices->update([
 
             'invoice_number' => $request->invoice_number,
@@ -178,9 +237,10 @@ class InvoicesController extends Controller
             'value_VAT' => $request->value_VAT,
             'rate_VAT' => $request->rate_VAT,
             'total' => $request->total,
-            'note' => $request->note,
+            'note' => $request->note
 
         ]);
+
 
 //        $attachment = Invoices_Attachments::findOrFail($request->invoice_id);
 //
@@ -222,6 +282,11 @@ class InvoicesController extends Controller
 
         else {
 
+            $invoices->update([
+
+                'archived_by' =>Auth::user()->name
+
+            ]);
             $invoices->delete();
             session()->flash('archive' , 'تم ارشفة الفاتورة بنجاح');
             return redirect('/Invoices_Archive');
@@ -241,13 +306,25 @@ class InvoicesController extends Controller
 
         $invoice = Invoices::findorFail($id);
 
+        $this->validate($request, [
+
+            'status' => 'required',
+            'payment_date' => 'required'
+
+        ],[
+
+            'status.required' =>'يرجى ادخال حالة الدفع',
+            'payment_date.required' => 'يرجى ادخال تاريخ الدفع'
+
+        ]);
+
         if ($request->status == 'مدفوعة'){
 
             $invoice->update([
 
                 'status' => $request->status,
                 'value_status' => 1,
-                'payment_date' => $request->payment_date,
+                'payment_date' => $request->payment_date
 
             ]);
 
@@ -261,7 +338,7 @@ class InvoicesController extends Controller
                 'value_status' => 1,
                 'note' => $request->note,
                 'payment_date' => $request->payment_date,
-                'user' => (Auth::user()->name),
+                'user' => (Auth::user()->name)
 
             ]);
 
@@ -287,7 +364,7 @@ class InvoicesController extends Controller
                 'value_status' => 3,
                 'note' => $request->note,
                 'payment_date' => $request->payment_date,
-                'user' => (Auth::user()->name),
+                'user' => (Auth::user()->name)
 
             ]);
 
@@ -333,14 +410,42 @@ class InvoicesController extends Controller
 
     }
 
+    public function View_All_Notification (){
+
+        return view('notification.index');
+
+    }
+
     public function MarkAsRead_All ()
     {
         $userUnreadNotification= auth()->user()->unreadNotifications;
 
         if($userUnreadNotification) {
+
             $userUnreadNotification->markAsRead();
-            return back();
+
         }
+
+        return back();
+
+    }
+
+    public function MarkAsRead ()
+    {
+        $id = auth()->user()->unreadNotifications[0]->id;
+        $userUnreadNotification = auth()->user()
+            ->unreadNotifications
+            ->where('id', $id)
+            ->first();
+
+        $Invoices_id = $userUnreadNotification->data['id'];
+
+        if($userUnreadNotification) {
+            $userUnreadNotification->markAsRead();
+        }
+
+        return redirect()->route('InvoicesDetails', ['id' => $Invoices_id]);
+
     }
 
 }

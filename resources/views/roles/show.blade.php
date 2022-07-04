@@ -22,6 +22,9 @@
                 الصلاحيات</span>
             </div>
         </div>
+        <div class="mb-3 mb-xl-0">
+            <a class="btn btn-danger-gradient btn-rounded btn-sm" href="{{ url()->previous() }}">رجوع</a>
+        </div>
     </div>
     <!-- breadcrumb -->
 
@@ -31,11 +34,6 @@
         <div class="col-md-12">
             <div class="card mg-b-20">
                 <div class="card-body">
-                    <div class="main-content-label mg-b-5">
-                        <div class="pull-right">
-                            <a class="btn btn-primary btn-sm" href="{{ route('roles.index') }}">رجوع</a>
-                        </div>
-                    </div>
                     <div class="row">
                         <!-- col -->
                         <div class="col-lg-4">

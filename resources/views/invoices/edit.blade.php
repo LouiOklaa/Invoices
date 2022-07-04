@@ -24,6 +24,9 @@
                     تعديل فاتورة</span>
             </div>
         </div>
+        <div class="mb-3 mb-xl-0">
+            <a class="btn btn-danger-gradient btn-rounded btn-sm" href="{{ url()->previous() }}">رجوع</a>
+        </div>
     </div>
     <!-- breadcrumb -->
 @endsection
@@ -35,6 +38,16 @@
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
     @endif
 
@@ -54,19 +67,19 @@
                                 <label for="inputName" class="control-label">رقم الفاتورة</label>
                                 <input type="hidden" name="invoice_id" value="{{ $invoices->id }}">
                                 <input type="text" class="form-control" id="invoice_number" name="invoice_number"
-                                       title="يرجي ادخال رقم الفاتورة" value="{{ $invoices->invoice_number }}" required>
+                                       title="يرجي ادخال رقم الفاتورة" value="{{ $invoices->invoice_number }}">
                             </div>
 
                             <div class="col">
                                 <label>تاريخ الفاتورة</label>
                                 <input class="form-control fc-datepicker" name="invoice_Date" placeholder="YYYY-MM-DD"
-                                       type="text" value="{{ $invoices->invoice_Date }}" required>
+                                       type="text" value="{{ $invoices->invoice_Date }}">
                             </div>
 
                             <div class="col">
                                 <label>تاريخ الاستحقاق</label>
                                 <input class="form-control fc-datepicker" name="due_date" placeholder="YYYY-MM-DD"
-                                       type="text" value="{{ $invoices->due_date }}" required>
+                                       type="text" value="{{ $invoices->due_date }}">
                             </div>
 
                         </div>
@@ -75,7 +88,7 @@
                         <div class="row">
                             <div class="col">
                                 <label for="inputName" class="control-label">القسم</label>
-                                <select name="section" class="form-control SlectBox" onclick="console.log($(this).val())"
+                                <select name="section" class="form-control select2" onclick="console.log($(this).val())"
                                         onchange="console.log('change is firing')">
                                     <!--placeholder-->
                                     <option value=" {{ $invoices->section->id }}">
@@ -91,7 +104,7 @@
 
                             <div class="col">
                                 <label for="inputName" class="control-label">المنتج</label>
-                                <select id="product" name="product" class="form-control">
+                                <select id="product" name="product" class="form-control select2">
                                     <option value="{{ $invoices->product }}"> {{ $invoices->product }}</option>
                                 </select>
                             </div>
@@ -114,7 +127,7 @@
                                 <input type="text" class="form-control form-control-lg" id="amount_commission"
                                        name="amount_commission" title="يرجي ادخال مبلغ العمولة "
                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                       value="{{ $invoices->amount_commission }}" required>
+                                       value="{{ $invoices->amount_commission }}">
                             </div>
 
                             <div class="col">
@@ -122,7 +135,7 @@
                                 <input type="text" class="form-control form-control-lg" id="discount" name="discount"
                                        title="يرجي ادخال مبلغ الخصم "
                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                       value="{{ $invoices->discount }}" required>
+                                       value="{{ $invoices->discount }}">
                             </div>
 
                             <div class="col">
