@@ -1,4 +1,5 @@
 @extends('layouts.master')
+
 @section('css')
     <!---Internal  Prism css-->
     <link href="{{ URL::asset('assets/plugins/prism/prism.css') }}" rel="stylesheet">
@@ -7,16 +8,17 @@
     <!--- Custom-scroll -->
     <link href="{{ URL::asset('assets/plugins/custom-scroll/jquery.mCustomScrollbar.css') }}" rel="stylesheet">
 @endsection
+
 @section('title')
-    تفاصيل فاتورة
+    تفاصيل فاتورة - لؤي سوفت
 @stop
+
 @section('page-header')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">قائمة الفواتير</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                    تفاصيل الفاتورة</span>
+                <h4 class="content-title mb-0 my-auto">قائمة الفواتير</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ تفاصيل الفاتورة</span>
             </div>
         </div>
         <div class="mb-3 mb-xl-0">
@@ -25,6 +27,7 @@
     </div>
     <!-- breadcrumb -->
 @endsection
+
 @section('content')
 
     @if ($errors->any())
@@ -36,6 +39,7 @@
             </ul>
         </div>
     @endif
+
     @if (session()->has('Add'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>&nbsp &nbsp &nbsp &nbsp{{ session()->get('Add') }}</strong>
@@ -44,6 +48,7 @@
             </button>
         </div>
     @endif
+
     @if (session()->has('delete'))
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong>&nbsp &nbsp &nbsp &nbsp{{ session()->get('delete') }}</strong>
@@ -75,186 +80,168 @@
                                 </div>
                                 <div class="panel-body tabs-menu-body main-content-body-right border">
                                     <div class="tab-content">
-
-
                                         <div class="tab-pane active" id="tab4">
                                             <div class="table-responsive mt-15">
-
                                                 <table class="table table-striped" style="text-align:center">
                                                     <tbody>
-                                                    <tr>
-                                                        <th scope="row">رقم الفاتورة</th>
-                                                        <td>{{$invoices->invoice_number}}</td>
-                                                        <th scope="row">تاريخ الاصدار</th>
-                                                        <td>{{$invoices->invoice_Date}}</td>
-                                                        <th scope="row">تاريخ الاستحقاق</th>
-                                                        <td>{{$invoices->due_date}}</td>
-                                                        <th scope="row">القسم</th>
-                                                        <td>{{$invoices->section->section_name}}</td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <th scope="row">المنتج</th>
-                                                        <td>{{$invoices->product}}</td>
-                                                        <th scope="row">مبلغ التحصيل</th>
-                                                        <td>{{$invoices->amount_collection}}</td>
-                                                        <th scope="row">مبلغ العمولة</th>
-                                                        <td>{{$invoices->amount_commission}}</td>
-                                                        <th scope="row">الخصم</th>
-                                                        <td>{{$invoices->discount}}</td>
-                                                    </tr>
-
-
-                                                    <tr>
-                                                        <th scope="row">نسبة الضريبة</th>
-                                                        <td>{{$invoices->rate_VAT}}</td>
-                                                        <th scope="row">قيمة الضريبة</th>
-                                                        <td>{{$invoices->value_VAT}}</td>
-                                                        <th scope="row">الاجمالي مع الضريبة</th>
-                                                        <td>{{$invoices->total}}</td>
-                                                        <th scope="row">الحالة الحالية</th>
-                                                        <td>
-                                                            @if ($invoices->value_status == 1)
-                                                                <label class="badge badge-success">{{$invoices->status}}</label>
-                                                            @elseif($invoices->value_status == 2)
-                                                                <label class="badge badge-danger">{{$invoices->status}}</label>
-                                                            @else
-                                                                <label class="badge badge-warning" style="color: white;">{{$invoices->status}}</label>
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <th scope="row">ملاحظات</th>
-                                                        @if($invoices->note == NULL)
-                                                            <td style="text-align: center; color: #BEC1C8">---</td>
-                                                        @else
-                                                            <td style="text-align: center">{{$invoices->note}}</td>
-                                                        @endif
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-
-                                            </div>
-                                        </div>
-
-                                        <div class="tab-pane" id="tab5">
-                                            <div class="table-responsive mt-15">
-                                                <table class="table center-aligned-table mb-0 table-hover"
-                                                       style="text-align:center">
-                                                    <thead>
-                                                    <tr class="text-dark">
-                                                        <th>ID</th>
-                                                        <th>رقم الفاتورة</th>
-                                                        <th>نوع المنتج</th>
-                                                        <th>القسم</th>
-                                                        <th>حالة الدفع</th>
-                                                        <th>تاريخ الدفع</th>
-                                                        <th>ملاحظات</th>
-                                                        <th>تاريخ الاضافة</th>
-                                                        <th>المستخدم</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <?php $i=0?>
-                                                    @foreach($details as $one)
-                                                    <?php $i++?>
                                                         <tr>
-                                                            <td>{{$i}}</td>
-                                                            <td>{{$one->invoice_number}}</td>
-                                                            <td>{{$one->product}}</td>
+                                                            <th scope="row">رقم الفاتورة</th>
+                                                            <td>{{$invoices->invoice_number}}</td>
+                                                            <th scope="row">تاريخ الاصدار</th>
+                                                            <td>{{$invoices->invoice_Date}}</td>
+                                                            <th scope="row">تاريخ الاستحقاق</th>
+                                                            <td>{{$invoices->due_date}}</td>
+                                                            <th scope="row">القسم</th>
                                                             <td>{{$invoices->section->section_name}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">المنتج</th>
+                                                            <td>{{$invoices->product}}</td>
+                                                            <th scope="row">مبلغ التحصيل</th>
+                                                            <td>{{$invoices->amount_collection}}</td>
+                                                            <th scope="row">مبلغ العمولة</th>
+                                                            <td>{{$invoices->amount_commission}}</td>
+                                                            <th scope="row">الخصم</th>
+                                                            <td>{{$invoices->discount}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">نسبة الضريبة</th>
+                                                            <td>{{$invoices->rate_VAT}}</td>
+                                                            <th scope="row">قيمة الضريبة</th>
+                                                            <td>{{$invoices->value_VAT}}</td>
+                                                            <th scope="row">الاجمالي مع الضريبة</th>
+                                                            <td>{{$invoices->total}}</td>
+                                                            <th scope="row">الحالة الحالية</th>
                                                             <td>
-                                                                @if ($one->value_status == 1)<label class="badge badge-success">{{$one->status}}</label>
-                                                                @elseif($one->value_status == 2)
-                                                                    <label class="badge badge-danger">{{$one->status}}</label>
+                                                                @if ($invoices->value_status == 1)
+                                                                    <label class="badge badge-success">{{$invoices->status}}</label>
+                                                                @elseif($invoices->value_status == 2)
+                                                                    <label class="badge badge-danger">{{$invoices->status}}</label>
                                                                 @else
-                                                                    <label class="badge badge-warning" style="color: white;">{{$one->status}}</label>
+                                                                    <label class="badge badge-warning" style="color: white;">{{$invoices->status}}</label>
                                                                 @endif
                                                             </td>
-                                                            @if($one->payment_date == NULL)
-                                                                <td style="text-align: center; color: #BEC1C8">---</td>
-                                                            @else
-                                                                <td>{{$one->payment_date}}</td>
-                                                            @endif
-                                                            @if($one->note == NULL)
-                                                                <td style="text-align: center; color: #BEC1C8">---</td>
-                                                            @else
-                                                                <td style="text-align: center">{{$one->note}}</td>
-                                                            @endif
-                                                            <td>{{$one->created_at}}</td>
-                                                            <td>{{$one->user}}</td>
                                                         </tr>
-                                                    @endforeach
+                                                        <tr>
+                                                            <th scope="row">ملاحظات</th>
+                                                            @if($invoices->note == NULL)
+                                                                <td style="text-align: center; color: #BEC1C8">---</td>
+                                                            @else
+                                                                <td style="text-align: center">{{$invoices->note}}</td>
+                                                            @endif
+                                                        </tr>
                                                     </tbody>
                                                 </table>
-
-
                                             </div>
                                         </div>
-
-
+                                        <div class="tab-pane" id="tab5">
+                                            <div class="table-responsive mt-15">
+                                                <table class="table center-aligned-table mb-0 table-hover" style="text-align:center">
+                                                    <thead>
+                                                        <tr class="text-dark">
+                                                            <th>ID</th>
+                                                            <th>رقم الفاتورة</th>
+                                                            <th>نوع المنتج</th>
+                                                            <th>القسم</th>
+                                                            <th>حالة الدفع</th>
+                                                            <th>تاريخ الدفع</th>
+                                                            <th>ملاحظات</th>
+                                                            <th>تاريخ الاضافة</th>
+                                                            <th>المستخدم</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php $i=0?>
+                                                        @foreach($details as $one)
+                                                            <?php $i++?>
+                                                            <tr>
+                                                                <td>{{$i}}</td>
+                                                                <td>{{$one->invoice_number}}</td>
+                                                                <td>{{$one->product}}</td>
+                                                                <td>{{$invoices->section->section_name}}</td>
+                                                                <td>
+                                                                    @if ($one->value_status == 1)<label class="badge badge-success">{{$one->status}}</label>
+                                                                    @elseif($one->value_status == 2)
+                                                                        <label class="badge badge-danger">{{$one->status}}</label>
+                                                                    @else
+                                                                        <label class="badge badge-warning" style="color: white;">{{$one->status}}</label>
+                                                                    @endif
+                                                                </td>
+                                                                @if($one->payment_date == NULL)
+                                                                    <td style="text-align: center; color: #BEC1C8">---</td>
+                                                                @else
+                                                                    <td>{{$one->payment_date}}</td>
+                                                                @endif
+                                                                @if($one->note == NULL)
+                                                                    <td style="text-align: center; color: #BEC1C8">---</td>
+                                                                @else
+                                                                    <td style="text-align: center">{{$one->note}}</td>
+                                                                @endif
+                                                                <td>{{$one->created_at}}</td>
+                                                                <td>{{$one->user}}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                         <div class="tab-pane" id="tab6">
                                             <!--Attachments-->
                                             <div class="card card-statistics">
-                                                    <div class="card-body">
-                                                        @can('اضافة مرفق')
-                                                           <p class="text-danger">* صيغة المرفق pdf, jpeg ,.jpg , png </p>
-                                                           <h5 class="card-title">اضافة مرفقات</h5>
-                                                           <form method="post" action="{{ url('/InvoiceAttachments') }}"
-                                                                 enctype="multipart/form-data">
-                                                               {{ csrf_field() }}
-                                                               <div class="custom-file">
-                                                                   <input type="file" class="custom-file-input" id="customFile"
-                                                                          name="file_name" required>
-                                                                   <input type="hidden" id="customFile" name="invoice_number"
-                                                                          value="{{$one->invoice_number}}">
-                                                                   <input type="hidden" id="invoice_id" name="invoice_id"
-                                                                          value="{{$one->invoice_id}}">
-                                                                   <label class="custom-file-label" for="customFile">حدد
-                                                                       المرفق</label>
-                                                               </div><br><br>
-                                                               <button type="submit" class="btn btn-rounded btn-primary btn-sm "
-                                                                       name="uploadedFile">تاكيد</button>
-                                                           </form>
-                                                        @endcan
-                                                    </div>
+                                                <div class="card-body">
+                                                    @can('اضافة مرفق')
+                                                       <p class="text-danger">* صيغة المرفق pdf, jpeg ,.jpg , png </p>
+                                                       <h5 class="card-title">اضافة مرفقات</h5>
+                                                       <form method="post" action="{{ url('/InvoiceAttachments') }}" enctype="multipart/form-data">
+                                                           {{ csrf_field() }}
+                                                           <div class="custom-file">
+                                                               <input type="file" class="custom-file-input" id="customFile"
+                                                                      name="file_name" required>
+                                                               <input type="hidden" id="customFile" name="invoice_number"
+                                                                      value="{{$one->invoice_number}}">
+                                                               <input type="hidden" id="invoice_id" name="invoice_id"
+                                                                      value="{{$one->invoice_id}}">
+                                                               <label class="custom-file-label" for="customFile">حدد
+                                                                   المرفق</label>
+                                                           </div><br><br>
+                                                           <button type="submit" class="btn btn-rounded btn-primary btn-sm " name="uploadedFile">تاكيد</button>
+                                                       </form>
+                                                    @endcan
+                                                </div>
                                                 <br>
-
                                                 <div class="table-responsive mt-15">
-                                                    <table class="table center-aligned-table mb-0 table table-hover"
-                                                           style="text-align:center">
+                                                    <table class="table center-aligned-table mb-0 table table-hover" style="text-align:center">
                                                         <thead>
-                                                        <tr class="text-dark">
-                                                            <th scope="col">ID</th>
-                                                            <th scope="col">اسم الملف</th>
-                                                            <th scope="col">قام بالاضافة</th>
-                                                            <th scope="col">تاريخ الاضافة</th>
-                                                            <th scope="col">العمليات</th>
-                                                        </tr>
+                                                            <tr class="text-dark">
+                                                                <th scope="col">ID</th>
+                                                                <th scope="col">اسم الملف</th>
+                                                                <th scope="col">قام بالاضافة</th>
+                                                                <th scope="col">تاريخ الاضافة</th>
+                                                                <th scope="col">العمليات</th>
+                                                            </tr>
                                                         </thead>
                                                         <tbody>
-                                                        <?php $i = 0; ?>
-                                                        @foreach ($attachments as $one)
-                                                            <?php $i++; ?>
-                                                            <tr>
-                                                                <td> {{$i}}</td>
-                                                                <td>{{$one->file_name}}</td>
-                                                                <td>{{$one->created_by}}</td>
-                                                                <td>{{$one->created_at}}</td>
-                                                                <td colspan="2">
-                                                                    @can('عرض مرفق')
-                                                                        <a class="btn btn-rounded btn-success btn-sm" style="color: white;" href="{{ url('View_file') }}/{{ $invoices->invoice_number }}/{{ $one->file_name }}" role="button">عرض</a>
-                                                                    @endcan
-                                                                    @can('تحميل مرفق')
-                                                                       <a class="btn btn-rounded btn-info btn-sm" style="color: white;" href="{{ url('Download_file') }}/{{ $invoices->invoice_number }}/{{ $one->file_name }}" role="button">تحميل</a>
-                                                                    @endcan
-                                                                    @can('حذف مرفق')
-                                                                        <button class="btn btn-rounded btn-danger btn-sm" data-toggle="modal" data-file_name="{{ $one->file_name }}" data-invoice_number="{{ $one->invoice_number }}" data-id_file="{{ $one->id }}" data-target="#delete_file">حذف</button>
-                                                                    @endcan
-                                                                </td>
-                                                            </tr>
-                                                        @endforeach
+                                                            <?php $i = 0; ?>
+                                                            @foreach ($attachments as $one)
+                                                                <?php $i++; ?>
+                                                                <tr>
+                                                                    <td> {{$i}}</td>
+                                                                    <td>{{$one->file_name}}</td>
+                                                                    <td>{{$one->created_by}}</td>
+                                                                    <td>{{$one->created_at}}</td>
+                                                                    <td colspan="2">
+                                                                        @can('عرض مرفق')
+                                                                            <a class="btn btn-rounded btn-success btn-sm" style="color: white;" href="{{ url('View_file') }}/{{ $invoices->invoice_number }}/{{ $one->file_name }}" role="button">عرض</a>
+                                                                        @endcan
+                                                                        @can('تحميل مرفق')
+                                                                           <a class="btn btn-rounded btn-info btn-sm" style="color: white;" href="{{ url('Download_file') }}/{{ $invoices->invoice_number }}/{{ $one->file_name }}" role="button">تحميل</a>
+                                                                        @endcan
+                                                                        @can('حذف مرفق')
+                                                                            <button class="btn btn-rounded btn-danger btn-sm" data-toggle="modal" data-file_name="{{ $one->file_name }}" data-invoice_number="{{ $one->invoice_number }}" data-id_file="{{ $one->id }}" data-target="#delete_file">حذف</button>
+                                                                        @endcan
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -290,7 +277,6 @@
                         <input type="hidden" name="id_file" id="id_file" value="">
                         <input type="hidden" name="file_name" id="file_name" value="">
                         <input type="hidden" name="invoice_number" id="invoice_number" value="">
-
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-rounded btn-danger">تاكيد</button>
@@ -309,6 +295,7 @@
     </div>
     <!-- main-content closed -->
 @endsection
+
 @section('js')
     <!--Internal  Datepicker js -->
     <script src="{{ URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js') }}"></script>
@@ -326,7 +313,7 @@
     <script src="{{ URL::asset('assets/plugins/clipboard/clipboard.js') }}"></script>
     <!-- Internal Prism js-->
     <script src="{{ URL::asset('assets/plugins/prism/prism.js') }}"></script>
-
+    <!-- Delete Modal Script -->
     <script>
         $('#delete_file').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
@@ -339,7 +326,6 @@
             modal.find('.modal-body #invoice_number').val(invoice_number);
         })
     </script>
-
     <script>
         // Add the following code if you want the name of the file appear on select
         $(".custom-file-input").on("change", function() {
@@ -347,5 +333,4 @@
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
     </script>
-
 @endsection

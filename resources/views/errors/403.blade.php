@@ -1,4 +1,9 @@
 @extends('layouts.master2')
+
+@section('title')
+    خطأ 403 - لؤي سوفت
+@endsection
+
 @section('css')
 <!--- Internal Fontawesome css-->
 <link href="{{URL::asset('assets/plugins/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
@@ -11,14 +16,16 @@
 <!---Internal Falg-icons css-->
 <link href="{{URL::asset('assets/plugins/flag-icon-css/css/flag-icon.min.css')}}" rel="stylesheet">
 @endsection
+
 @section('content')
 		<!-- Main-error-wrapper -->
-		<div class="main-error-wrapper  page page-h ">
-			<img src="{{URL::asset('assets/img/media/500.png')}}" class="error-page" alt="error">
-			<h2>Oopps. The page you were looking for doesn't exist.</h2>
-			<h6>You may have mistyped the address or the page may have moved.</h6><a class="btn btn-outline-danger" href="{{ url('/' . $page='index') }}">Back to Home</a>
+		<div class="main-error-wrapper page page-h ">
+			<img src="{{URL::asset('assets/img/media/403.png')}}" class="error-page" alt="error">
+			<h2>عذراً , المستخدم ليس لديه الأذونات الصحيحة.</h2>
+			<h6>ربما ليس لديك الصلاحية المناسبة أو ربما لم تقم بتسجيل الدخول.</h6><a class="btn btn-rounded btn-primary" href="{{ url('/' . $page='home') }}">العودة للصفحة الرئيسية</a>
 		</div>
 		<!-- /Main-error-wrapper -->
 @endsection
+
 @section('js')
 @endsection

@@ -1,8 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
@@ -31,8 +31,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $data = User::orderBy('id')->paginate(5);
-        return view('users.show_users',compact('data'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+        return view('users.show_users',compact('data'))->with('i', ($request->input('page', 1) - 1) * 5);
     }
     /**
      * Show the form for creating a new resource.
@@ -58,7 +57,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
-            'roles_name' => 'required'
+            'role_name' => 'required'
 
         ],[
 
@@ -68,14 +67,14 @@ class UserController extends Controller
             'email.unique' => 'البريد الالكتروني موجود مسبقا',
             'password.required' =>'يرجى ادخال كلمة المرور',
             'password.same' =>'كلمات المرور غير متطابقين',
-            'roles_name.required' =>'يرجى اختيار صلاحية واحدة ع الاقل',
+            'role_name.required' =>'يرجى اختيار صلاحية واحدة ع الاقل',
 
         ]);
 
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
         $user = User::create($input);
-        $user->assignRole($request->input('roles_name'));
+        $user->assignRole($request->input('role_name'));
 
         session()->flash('Add','تم اضافة المستخدم بنجاح');
         return redirect()->route('users.index');
@@ -102,6 +101,7 @@ class UserController extends Controller
         $user = User::find($id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
+
         return view('users.edit',compact('user','roles','userRole'));
     }
     /**
@@ -118,7 +118,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
             'password' => 'required|same:confirm-password',
-            'roles_name' => 'required'
+            'role_name' => 'required'
 
         ],[
 
@@ -128,7 +128,7 @@ class UserController extends Controller
             'email.unique' => 'البريد الالكتروني موجود مسبقا',
             'password.required' =>'يرجى ادخال كلمة المرور',
             'password.same' =>'كلمات المرور غير متطابقين',
-            'roles_name.required' =>'يرجى اختيار صلاحية واحدة ع الاقل',
+            'role_name.required' =>'يرجى اختيار صلاحية واحدة ع الاقل',
 
         ]);
 
@@ -138,6 +138,7 @@ class UserController extends Controller
             $input['password'] = Hash::make($input['password']);
 
         }
+
         else{
 
             $input = array_except($input,array('password'));
@@ -147,7 +148,7 @@ class UserController extends Controller
         $user = User::find($id);
         $user->update($input);
         DB::table('model_has_roles')->where('model_id',$id)->delete();
-        $user->assignRole($request->input('roles_name'));
+        $user->assignRole($request->input('role_name'));
 
         session()->flash('Edit','تم تعديل المستخدم بنجاح');
         return redirect()->route('users.index');
@@ -168,7 +169,8 @@ class UserController extends Controller
 
     public function profile (){
 
-        return view('users.profile');
+        $role = Role::where('name' , '=' , Auth::user()->role_name)->first();
+        return view('users.profile',compact('role'));
 
     }
 }

@@ -1,7 +1,9 @@
 @extends('layouts.master')
+
 @section('title')
-    الأقسام
+    الأقسام - لؤي سوفت
 @endsection
+
 @section('css')
     <!-- Internal Data table css -->
     <link href="{{URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
@@ -11,18 +13,21 @@
     <link href="{{URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
 @endsection
+
 @section('page-header')
-				<!-- breadcrumb -->
-				<div class="breadcrumb-header justify-content-between">
-					<div class="my-auto">
-						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">الاعدادات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ الاقسام</span>
-						</div>
-					</div>
-                </div>
-				<!-- breadcrumb -->
+    <!-- breadcrumb -->
+    <div class="breadcrumb-header justify-content-between">
+        <div class="my-auto">
+            <div class="d-flex">
+                <h4 class="content-title mb-0 my-auto">الاعدادات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ الاقسام </span>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb -->
 @endsection
+
 @section('content')
+
     @if (session()->has('Add'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>&nbsp &nbsp &nbsp &nbsp{{ session()->get('Add') }}</strong>
@@ -59,6 +64,7 @@
             </button>
         </div>
     @endif
+
     <!-- row -->
     <div class="row">
         <!--div-->
@@ -75,35 +81,35 @@
                     <div class="table-responsive">
                         <table id="example1" class="table key-buttons text-md-nowrap" data-page-length='50'>
                             <thead>
-                            <tr>
-                                <th class="border-bottom-0">ID</th>
-                                <th class="border-bottom-0">اسم القسم</th>
-                                <th class="border-bottom-0">ملاحظات</th>
-                                <th class="border-bottom-0">العمليات</th>
-                            </tr>
+                                <tr>
+                                    <th class="border-bottom-0">ID</th>
+                                    <th class="border-bottom-0">اسم القسم</th>
+                                    <th class="border-bottom-0">ملاحظات</th>
+                                    <th class="border-bottom-0">العمليات</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <?php $i=0?>
-                            @foreach($sections as $one)
-                                <?php $i++?>
-                            <tr>
-                                <td>{{$i}}</td>
-                                <td>{{$one->section_name}}</td>
-                                @if($one->description == NULL)
-                                    <td style="text-align: center; color: #BEC1C8">---</td>
-                                @else
-                                    <td>{{$one->description}}</td>
-                                @endif
-                                <td>
-                                    @can('تعديل قسم')
-                                       <button class="btn btn-rounded btn-sm btn btn-info" href="#editmodal" title="تعديل" data-id="{{ $one->id }}" data-section_name="{{ $one->section_name }}" data-description="{{ $one->description }}" data-toggle="modal">تعديل</button>
-                                    @endcan
-                                    @can('حذف قسم')
-                                       <button class="btn btn-rounded btn-sm btn btn-danger" data-id="{{ $one->id }}" title="حذف" data-section_name="{{ $one->section_name }}" href="#modaldemo9" data-toggle="modal">حذف</button>
-                                    @endcan
-                                </td>
-                            </tr>
-                            @endforeach
+                                <?php $i=0?>
+                                @foreach($sections as $one)
+                                    <?php $i++?>
+                                <tr>
+                                    <td>{{$i}}</td>
+                                    <td>{{$one->section_name}}</td>
+                                    @if($one->description == NULL)
+                                        <td style="text-align: center; color: #BEC1C8">---</td>
+                                    @else
+                                        <td>{{$one->description}}</td>
+                                    @endif
+                                    <td>
+                                        @can('تعديل قسم')
+                                           <button class="btn btn-rounded btn-sm btn btn-info" href="#editmodal" title="تعديل" data-id="{{ $one->id }}" data-section_name="{{ $one->section_name }}" data-description="{{ $one->description }}" data-toggle="modal">تعديل</button>
+                                        @endcan
+                                        @can('حذف قسم')
+                                           <button class="btn btn-rounded btn-sm btn btn-danger" data-id="{{ $one->id }}" title="حذف" data-section_name="{{ $one->section_name }}" href="#modaldemo9" data-toggle="modal">حذف</button>
+                                        @endcan
+                                    </td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

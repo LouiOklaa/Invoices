@@ -1,16 +1,18 @@
 @extends('layouts.master')
+
 @section('css')
 @endsection
+
 @section('title')
-    تغير حالة الدفع
+    تغير حالة الدفع - لؤي سوفت
 @stop
+
 @section('page-header')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">الفواتير</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                    تغير حالة الدفع</span>
+                <h4 class="content-title mb-0 my-auto">الفواتير</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ تغير حالة الدفع</span>
             </div>
         </div>
         <div class="mb-3 mb-xl-0">
@@ -19,6 +21,7 @@
     </div>
     <!-- breadcrumb -->
 @endsection
+
 @section('content')
 
     @if ($errors->any())
@@ -55,7 +58,6 @@
                                 <label>تاريخ الاستحقاق</label>
                                 <input class="form-control" name="due_date" type="text" value="{{ $invoices->due_date }}" readonly>
                             </div>
-
                         </div>
 
                         {{-- 2 --}}
@@ -76,11 +78,8 @@
                             </div>
                         </div>
 
-
                         {{-- 3 --}}
-
                         <div class="row">
-
                             <div class="col">
                                 <label for="inputName" class="control-label">مبلغ العمولة</label>
                                 <input type="text" class="form-control form-control-lg" id="amount_commission" value="{{ $invoices->amount_commission }}" readonly>
@@ -95,11 +94,9 @@
                                 <label for="inputName" class="control-label">نسبة ضريبة القيمة المضافة</label>
                                 <input type="text" class="form-control form-control-lg" id="rate_VAT" name="rate_VAT" value="{{ $invoices->rate_VAT }}" readonly>
                             </div>
-
                         </div>
 
                         {{-- 4 --}}
-
                         <div class="row">
                             <div class="col">
                                 <label for="inputName" class="control-label">قيمة ضريبة القيمة المضافة</label>
@@ -132,17 +129,13 @@
 
                             <div class="col">
                                 <label>تاريخ الدفع</label>
-                                <input class="form-control fc-datepicker" id="payment_date" name="payment_date" placeholder="YYYY-MM-DD" value="{{ date('Y-m-d') }}"
-                                       type="text">
+                                <input class="form-control fc-datepicker" id="payment_date" name="payment_date" placeholder="YYYY-MM-DD" value="{{ date('Y-m-d') }}" type="text">
                             </div>
-
-
                         </div><br>
 
                         <div class="d-flex justify-content-center">
                             <button type="submit" class="btn btn-primary">تحديث حالة الدفع</button>
                         </div>
-
                     </form>
                 </div>
             </div>
@@ -154,6 +147,7 @@
     </div>
     <!-- main-content closed -->
 @endsection
+
 @section('js')
     <!-- Internal Select2 js-->
     <script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
@@ -170,7 +164,6 @@
     <script src="{{ URL::asset('assets/plugins/spectrum-colorpicker/spectrum.js') }}"></script>
     <!-- Internal form-elements js -->
     <script src="{{ URL::asset('assets/js/form-elements.js') }}"></script>
-
     <script>
         var date = $('.fc-datepicker').datepicker({
             dateFormat: 'yy-mm-dd'

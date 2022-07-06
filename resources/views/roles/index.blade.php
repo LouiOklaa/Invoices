@@ -1,23 +1,26 @@
 @extends('layouts.master')
+
+@section('title')
+    صلاحيات المستخدمين - لؤي سوفت
+@stop
+
 @section('css')
     <!--Internal   Notify -->
     <link href="{{ URL::asset('assets/plugins/notify/css/notifIt.css') }}" rel="stylesheet" />
-@section('title')
-    صلاحيات المستخدمين - لؤي سوفت لادارة الفواتير
-@stop
 @endsection
+
 @section('page-header')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">المستخدمين</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
-                صلاحيات المستخدمين</span>
+                <h4 class="content-title mb-0 my-auto">المستخدمين</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> / صلاحيات المستخدمين</span>
             </div>
         </div>
     </div>
     <!-- breadcrumb -->
 @endsection
+
 @section('content')
 
     @if (session()->has('Add'))
@@ -62,44 +65,43 @@
                         </div>
                         <br>
                     </div>
-
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table mg-b-0 text-md-nowrap table-hover ">
                             <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>الاسم</th>
-                                <th>العمليات</th>
-                            </tr>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>الاسم</th>
+                                    <th>العمليات</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <?php $i=0?>
-                            @foreach ($roles as $key => $role)
-                            <?php $i ++?>
-                                <tr>
-                                    <td>{{ $i }}</td>
-                                    <td>{{ $role->name }}</td>
-                                    <td>
-                                        @can('عرض صلاحية')
-                                            <a class="btn btn-rounded btn-success btn-sm"
-                                               href="{{ route('roles.show', $role->id) }}">عرض</a>
-                                        @endcan
-
-                                        @can('تعديل صلاحية')
-                                            <a class="btn btn-rounded btn-info btn-sm"
-                                               href="{{ route('roles.edit', $role->id) }}">تعديل</a>
-                                        @endcan
-
-                                        @if ($role->name !== 'owner')
-                                            @can('حذف صلاحية')
-                                                <button class="btn btn-rounded btn-sm btn btn-danger" data-role_id="{{ $role->id }}" title="حذف" data-role_name="{{ $role->name }}" href="#delete_modal" data-toggle="modal">حذف</button>
+                                <?php $i=0?>
+                                @foreach ($roles as $key => $role)
+                                    <?php $i ++?>
+                                    <tr>
+                                        <td>{{ $i }}</td>
+                                        <td>{{ $role->name }}</td>
+                                        <td>
+                                            @can('عرض صلاحية')
+                                                <a class="btn btn-rounded btn-success btn-sm"
+                                                   href="{{ route('roles.show', $role->id) }}">عرض</a>
                                             @endcan
-                                        @endif
-                                    </td>
-                                </tr>
-                            @endforeach
+
+                                            @can('تعديل صلاحية')
+                                                <a class="btn btn-rounded btn-info btn-sm"
+                                                   href="{{ route('roles.edit', $role->id) }}">تعديل</a>
+                                            @endcan
+
+                                            @if ($role->name !== 'Owner')
+                                                @can('حذف صلاحية')
+                                                    <button class="btn btn-rounded btn-sm btn btn-danger" data-role_id="{{ $role->id }}" title="حذف" data-role_name="{{ $role->name }}" href="#delete_modal" data-toggle="modal">حذف</button>
+                                                @endcan
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

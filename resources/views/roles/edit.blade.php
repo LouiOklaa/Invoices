@@ -1,20 +1,22 @@
 @extends('layouts.master')
+
+@section('title')
+    تعديل الصلاحيات - لؤي سوفت
+@stop
+
 @section('css')
     <!--Internal  Font Awesome -->
     <link href="{{URL::asset('assets/plugins/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
     <!--Internal  treeview -->
     <link href="{{URL::asset('assets/plugins/treeview/treeview-rtl.css')}}" rel="stylesheet" type="text/css" />
-@section('title')
-    تعديل الصلاحيات - لؤي سوفت لادارة الفواتير
-@stop
 @endsection
+
 @section('page-header')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">الصلاحيات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ تعديل
-                الصلاحيات</span>
+                <h4 class="content-title mb-0 my-auto">الصلاحيات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ تعديل الصلاحيات</span>
             </div>
         </div>
         <div class="mb-3 mb-xl-0">
@@ -35,7 +37,6 @@
         </div>
     @endif
 
-
     {!! Form::model($role, ['method' => 'PATCH','route' => ['roles.update', $role->id]]) !!}
     <!-- row -->
     <div class="row">
@@ -43,9 +44,11 @@
             <div class="card mg-b-20">
                 <div class="card-body">
                     <div class="main-content-label mg-b-5">
-                        <div class="form-group">
-                            <p>اسم الصلاحية :</p>
-                            {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
+                        <div class="col-xs-7 col-sm-7 col-md-7">
+                            <div class="form-group">
+                                <p>اسم الصلاحية :</p>
+                                {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -81,6 +84,7 @@
     <!-- main-content closed -->
     {!! Form::close() !!}
 @endsection
+
 @section('js')
     <!-- Internal Treeview js -->
     <script src="{{URL::asset('assets/plugins/treeview/treeview.js')}}"></script>

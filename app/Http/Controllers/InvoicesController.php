@@ -143,14 +143,14 @@ class InvoicesController extends Controller
             $attachments->invoice_id = $InvoiceID;
             $attachments->save();
 
-            // Move Pic
+            //Move File
             $request->attachment->move(public_path('Attachments/' . $invoice_number), $file_name);
 
         }
         session()->flash('Add','تم اضافة الفاتورة بنجاح');
 
         //Send Notification & Mail
-        $user = User::where('roles_name' , '=' , '["owner"]')->orWhere('roles_name' , '=' , '["Admin"]')->get();
+        $user = User::where('role_name' , '=' , 'Owner')->orWhere('role_name' , '=' , 'Admin')->get();
         Notification::send($user, new \App\Notifications\AddInvoice($InvoiceID));
 
         return redirect('/invoices');
@@ -219,9 +219,11 @@ class InvoicesController extends Controller
         ]);
 
         if ($request->invoice_number != 'invoice_number'){
+            if(Storage::exists(public_path('Attachments/' . $invoices->invoice_number))) {
 
-            rename(public_path('Attachments/' . $invoices->invoice_number) , public_path('Attachments/' . $request->invoice_number));
+                rename(public_path('Attachments/' . $invoices->invoice_number), public_path('Attachments/' . $request->invoice_number));
 
+            }
         }
 
         $invoices->update([
@@ -240,15 +242,6 @@ class InvoicesController extends Controller
             'note' => $request->note
 
         ]);
-
-
-//        $attachment = Invoices_Attachments::findOrFail($request->invoice_id);
-//
-//        // move pic
-//        $attachment->file_name->move(public_path('Attachments/' . $request->invoice_number), $file_name);
-//
-//        $invoices->delete();
-//        Storage::disk('public_uploads')->delete($request->invoice_number.'/'.$attachment->file_name);
 
         session()->flash('Edit','تم تعديل الفاتورة بنجاج');
         return redirect('/invoices');
@@ -372,7 +365,6 @@ class InvoicesController extends Controller
 
         session()->flash('Update_Status' , 'تم تغيير حالة الدفع بنجاح');
         return redirect('/invoices');
-
 
     }
 

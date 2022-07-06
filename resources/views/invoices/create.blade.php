@@ -1,7 +1,9 @@
 @extends('layouts.master')
+
 @section('title')
-    اضافة فاتورة
+    اضافة فاتورة - لؤي سوفت
 @endsection
+
 @section('css')
     <!--- Internal Select2 css-->
     <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
@@ -14,6 +16,7 @@
     <!--Internal  TelephoneInput css-->
     <link rel="stylesheet" href="{{ URL::asset('assets/plugins/telephoneinput/telephoneinput-rtl.css') }}">
 @endsection
+
 @section('page-header')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
@@ -28,6 +31,7 @@
     </div>
     <!-- breadcrumb -->
 @endsection
+
 @section('content')
 
     @if ($errors->any())
@@ -48,34 +52,28 @@
                     <form action="{{route('invoices.store')}}" method="post" enctype="multipart/form-data" autocomplete="off">
                         {{ csrf_field() }}
                         {{-- 1 --}}
-
                         <div class="row">
                             <div class="col">
                                 <label for="invoice_number" class="control-label">رقم الفاتورة</label>
-                                <input type="text" class="form-control" id="invoice_number" name="invoice_number"
-                                       title="يرجي ادخال رقم الفاتورة">
+                                <input type="text" class="form-control" id="invoice_number" name="invoice_number" title="يرجي ادخال رقم الفاتورة">
                             </div>
 
                             <div class="col">
                                 <label>تاريخ الفاتورة</label>
-                                <input class="form-control fc-datepicker" name="invoice_Date" placeholder="YYYY-MM-DD"
-                                       type="text" value="{{ date('Y-m-d') }}">
+                                <input class="form-control fc-datepicker" name="invoice_Date" placeholder="YYYY-MM-DD" type="text" value="{{ date('Y-m-d') }}">
                             </div>
 
                             <div class="col">
                                 <label>تاريخ الاستحقاق</label>
-                                <input class="form-control fc-datepicker" name="due_date" placeholder="YYYY-MM-DD"
-                                       type="text">
+                                <input class="form-control fc-datepicker" name="due_date" placeholder="YYYY-MM-DD" type="text">
                             </div>
-
                         </div>
 
                         {{-- 2 --}}
                         <div class="row">
                             <div class="col">
                                 <label for="inputName" class="control-label">القسم</label>
-                                <select name="section" class="form-control select2" onclick="console.log($(this).val())"
-                                        onchange="console.log('change is firing')">
+                                <select name="section" class="form-control select2" onclick="console.log($(this).val())" onchange="console.log('change is firing')">
                                     <!--placeholder-->
                                     <option value="#" selected disabled>حدد القسم</option>
                                     @foreach ($sections as $one)
@@ -93,21 +91,15 @@
 
                             <div class="col">
                                 <label for="inputName" class="control-label">مبلغ التحصيل</label>
-                                <input type="text" class="form-control" id="inputName" name="amount_collection"
-                                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                                <input type="text" class="form-control" id="inputName" name="amount_collection" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                             </div>
                         </div>
 
-
                         {{-- 3 --}}
-
                         <div class="row">
-
                             <div class="col">
                                 <label for="inputName" class="control-label">مبلغ العمولة</label>
-                                <input type="text" class="form-control form-control-lg" id="amount_commission"
-                                       name="amount_commission" title="يرجي ادخال مبلغ العمولة "
-                                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                                <input type="text" class="form-control form-control-lg" id="amount_commission" name="amount_commission" title="يرجي ادخال مبلغ العمولة " oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                             </div>
 
                             <div class="col">
@@ -127,11 +119,9 @@
                                     <option value="10%">10%</option>
                                 </select>
                             </div>
-
                         </div>
 
                         {{-- 4 --}}
-
                         <div class="row">
                             <div class="col">
                                 <label for="inputName" class="control-label">قيمة ضريبة القيمة المضافة</label>
@@ -174,6 +164,7 @@
     </div>
     <!-- main-content closed -->
 @endsection
+
 @section('js')
     <!-- Internal Select2 js-->
     <script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>

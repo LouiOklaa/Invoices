@@ -46,6 +46,7 @@ class InvoicesAttachmentsController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, [
 
             'file_name' => 'mimes:pdf,jpeg,png,jpg',
@@ -64,7 +65,7 @@ class InvoicesAttachmentsController extends Controller
         $attachments->created_by = Auth::user()->name;
         $attachments->save();
 
-        // move pic
+        //Move File
         $request->file_name->move(public_path('Attachments/' . $request->invoice_number), $file_name);
 
         session()->flash('Add', 'تم اضافة المرفق بنجاح');

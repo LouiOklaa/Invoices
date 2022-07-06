@@ -1,21 +1,22 @@
 @extends('layouts.master')
+
+@section('title')
+    اضافة الصلاحيات - لؤي سوفت
+@stop
+
 @section('css')
     <!--Internal  Font Awesome -->
     <link href="{{URL::asset('assets/plugins/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
     <!--Internal  treeview -->
     <link href="{{URL::asset('assets/plugins/treeview/treeview-rtl.css')}}" rel="stylesheet" type="text/css" />
-@section('title')
-    اضافة الصلاحيات - لؤي سوفت لادارة الفواتير
-@stop
-
 @endsection
+
 @section('page-header')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">الصلاحيات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ اضافة
-                نوع مستخدم</span>
+                <h4 class="content-title mb-0 my-auto">الصلاحيات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ اضافة نوع مستخدم</span>
             </div>
         </div>
         <div class="mb-3 mb-xl-0">
@@ -59,8 +60,7 @@
                                     <ul>
                                         </li>
                                             @foreach($permission as $value)
-                                                <label
-                                                    style="font-size: 16px; margin-right: 6px;">
+                                                <label style="font-size: 16px; margin-right: 6px;">
                                                     <li>
                                                         {{ Form::checkbox('permission[]', $value->id, false, array('class' => 'name')) }}
                                                         {{ $value->name }}
@@ -77,12 +77,10 @@
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                             <button type="submit" class="btn btn-main-primary">تاكيد</button>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
     <!-- row closed -->
     </div>
@@ -92,6 +90,7 @@
 
     {!! Form::close() !!}
 @endsection
+
 @section('js')
     <!-- Internal Treeview js -->
     <script src="{{URL::asset('assets/plugins/treeview/treeview.js')}}"></script>

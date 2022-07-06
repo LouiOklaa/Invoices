@@ -1,14 +1,14 @@
 @extends('layouts.master2')
 
 @section('title')
-    تسجيل الدخول - لؤي سوفت للادارة القانونية
+    تسجيل الدخول - لؤي سوفت
 @endsection
-
 
 @section('css')
     <!-- Sidemenu-respoansive-tabs css -->
     <link href="{{URL::asset('assets/plugins/sidemenu-responsive-tabs/css/sidemenu-responsive-tabs.css')}}" rel="stylesheet">
 @endsection
+
 @section('content')
     <div class="container-fluid">
         <div class="row no-gutter">
@@ -21,10 +21,10 @@
                         <div class="row">
                             <div class="col-md-10 col-lg-10 col-xl-9 mx-auto">
                                 <div class="card-sigin">
-                                    <div class="mb-5 d-flex"> <a href="{{ url('/' . $page='Home') }}"><img src="{{URL::asset('assets/img/brand/favicon.png')}}" class="sign-favicon ht-40" alt="logo"></a><h1 class="main-logo1 ml-1 mr-0 my-auto tx-28">Loui<span>So</span>ft</h1></div>
+                                    <div class="mb-5 d-flex"><h1 class="main-logo1 ml-1 mr-0 my-auto tx-28">Loui<span>So</span>ft</h1><img src="{{URL::asset('assets/img/brand/favicon.png')}}" class="sign-favicon ht-40" alt="logo"></div>
                                     <div class="card-sigin">
                                         <div class="main-signup-header">
-                                            <h2>مرحبا بك</h2>
+                                            <h2>مرحبا بك !</h2>
                                             <h5 class="font-weight-semibold mb-4"> تسجيل الدخول</h5>
                                             <form method="POST" action="{{ route('login') }}">
                                                 @csrf
@@ -37,16 +37,13 @@
                                                      </span>
                                                     @enderror
                                                 </div>
-
                                                 <div class="form-group">
                                                     <label>كلمة المرور</label>
-
                                                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
                                                     @error('password')
                                                     <span class="invalid-feedback" role="alert">
-                                                  <strong>{{ $message }}</strong>
-                                                  </span>
+                                                      <strong>{{ $message }}</strong>
+                                                    </span>
                                                     @enderror
                                                     <div class="form-group row">
                                                         <div class="col-md-6 offset-md-4">
@@ -63,7 +60,10 @@
                                                 <button type="submit" class="btn btn-main-primary btn-block">
                                                     {{ __('تسجيل الدخول') }}
                                                 </button>
-                                            </form>
+                                            </form><br><br>
+                                            <div class="text-center">
+                                                <h6><span class="text-muted">. Copyright ©<script>document.write(new Date().getFullYear());</script> All Rights Reserved. <i class="fa fa-heart" aria-hidden="true" style="color: #0162E8"></i> Powerd By <a style="color: #0162E8;" href="https://www.facebook.com/loui.oklaa" target="_blank">Loui Oklaa</a></span></h6>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -80,9 +80,9 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 @endsection
+
 @section('js')
 @endsection

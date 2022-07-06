@@ -1,16 +1,18 @@
 @extends('layouts.master')
+
 @section('title')
-    الملف الشخصي
+    الملف الشخصي - لؤي سوفت
 @endsection
+
 @section('css')
 @endsection
+
 @section('page-header')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">المستخدمين</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ الملف
-                الشخصي</span>
+                <h4 class="content-title mb-0 my-auto">المستخدمين</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> / الملف الشخصي</span>
             </div>
         </div>
         <div class="mb-3 mb-xl-0">
@@ -33,12 +35,14 @@
                                         <div class="justify-content-between mg-b-20">
                                             <div>
                                                 <h5 class="main-profile-name">{{Auth::user()->name}}</h5>
-                                                <p class="main-profile-name-text">{{Auth::user()->roles_name[0]}}</p>
+                                                <p class="main-profile-name-text">
+                                                    {{Auth::user()->role_name}}
+                                                </p>
                                             </div>
                                         </div>
                                         <h6>الوصف</h6>
                                         <div class="main-profile-bio text-muted">
-                                            يعمل بصلاحية {{Auth::user()->roles_name[0]}} لدى لؤي - سوفت لادارة الفواتير
+                                            يعمل بصلاحية {{Auth::user()->role_name}} لدى لؤي - سوفت لادارة الفواتير
                                         </div><!-- main-profile-bio -->
                                         <label class="main-content-label tx-13 mg-b-20">مواقع التواصل الاجتماعي</label>
                                         <div class="main-profile-social-list">
@@ -205,7 +209,7 @@
                                                 <div class="col">
                                                     <div class="text-right">
                                                         <h5 class="tx-13">صلاحيات تم منحها</h5>
-                                                        <h2 class="mb-0 tx-22 mb-1 mt-1">{{number_format(\Spatie\Permission\Models\Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")->where("role_has_permissions.role_id",Auth::user()->id)->count())}}</h2>
+                                                        <h2 class="mb-0 tx-22 mb-1 mt-1">{{number_format(\Spatie\Permission\Models\Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")->where("role_has_permissions.role_id",$role->id)->count())}}</h2>
                                                     </div>
                                                 </div>
                                                 <div class="col">
@@ -229,5 +233,6 @@
 		</div>
 		<!-- main-content closed -->
 @endsection
+
 @section('js')
 @endsection

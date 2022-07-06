@@ -1,7 +1,9 @@
 @extends('layouts.master')
+
 @section('title')
-    المنتجات
+    المنتجات - لؤي سوفت
 @endsection
+
 @section('css')
     <!-- Internal Data table css -->
     <link href="{{URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
@@ -14,17 +16,19 @@
     <!--- Internal Select2 css-->
     <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
 @endsection
+
 @section('page-header')
-				<!-- breadcrumb -->
-				<div class="breadcrumb-header justify-content-between">
-					<div class="my-auto">
-						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">الاعدادات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ المنتجات</span>
-						</div>
-					</div>
-				</div>
-				<!-- breadcrumb -->
+    <!-- breadcrumb -->
+    <div class="breadcrumb-header justify-content-between">
+        <div class="my-auto">
+            <div class="d-flex">
+                <h4 class="content-title mb-0 my-auto">الاعدادات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ المنتجات</span>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb -->
 @endsection
+
 @section('content')
 
     @if (session()->has('Add'))
@@ -80,38 +84,37 @@
                     <div class="table-responsive">
                         <table id="example1" class="table key-buttons text-md-nowrap" data-page-length='50'>
                             <thead>
-                            <tr>
-                                <th class="border-bottom-0">ID</th>
-                                <th class="border-bottom-0">اسم المنتج</th>
-                                <th class="border-bottom-0">اسم القسم</th>
-                                <th class="border-bottom-0">ملاحظات</th>
-                                <th class="border-bottom-0">العمليات</th>
-
-                            </tr>
+                                <tr>
+                                    <th class="border-bottom-0">ID</th>
+                                    <th class="border-bottom-0">اسم المنتج</th>
+                                    <th class="border-bottom-0">اسم القسم</th>
+                                    <th class="border-bottom-0">ملاحظات</th>
+                                    <th class="border-bottom-0">العمليات</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <?php $i=0?>
-                            @foreach($products as $one)
-                                <?php $i++?>
-                                <tr>
-                                    <td>{{$i}}</td>
-                                    <td>{{$one->product_name}} </td>
-                                    <td>{{$one->section->section_name}}</td>
-                                    @if($one->description == NULL)
-                                        <td style="text-align: center; color: #BEC1C8">---</td>
-                                    @else
-                                        <td>{{$one->description}}</td>
-                                    @endif
-                                    <td>
-                                        @can('تعديل منتج')
-                                           <button class="btn btn-rounded btn-sm btn btn-info" href="#edit_modal" title="تعديل" data-product_id="{{ $one->id }}" data-product_name="{{ $one->product_name }}" data-section_name="{{ $one->section->section_name }}" data-description="{{ $one->description }}" data-toggle="modal">تعديل</button>
-                                        @endcan
-                                        @can('حذف منتج')
-                                           <button class="btn btn-rounded btn-sm btn btn-danger" data-product_id="{{ $one->id }}" title="حذف" data-product_name="{{ $one->product_name }}" href="#delete_modal" data-toggle="modal">حذف</button>
-                                        @endcan
-                                    </td>
-                                </tr>
-                            @endforeach
+                                <?php $i=0?>
+                                @foreach($products as $one)
+                                    <?php $i++?>
+                                    <tr>
+                                        <td>{{$i}}</td>
+                                        <td>{{$one->product_name}} </td>
+                                        <td>{{$one->section->section_name}}</td>
+                                        @if($one->description == NULL)
+                                            <td style="text-align: center; color: #BEC1C8">---</td>
+                                        @else
+                                            <td>{{$one->description}}</td>
+                                        @endif
+                                        <td>
+                                            @can('تعديل منتج')
+                                               <button class="btn btn-rounded btn-sm btn btn-info" href="#edit_modal" title="تعديل" data-product_id="{{ $one->id }}" data-product_name="{{ $one->product_name }}" data-section_name="{{ $one->section->section_name }}" data-description="{{ $one->description }}" data-toggle="modal">تعديل</button>
+                                            @endcan
+                                            @can('حذف منتج')
+                                               <button class="btn btn-rounded btn-sm btn btn-danger" data-product_id="{{ $one->id }}" title="حذف" data-product_name="{{ $one->product_name }}" href="#delete_modal" data-toggle="modal">حذف</button>
+                                            @endcan
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -150,7 +153,6 @@
                             <label for="exampleFormControlTextarea1">ملاحظات</label>
                             <textarea class="form-control" id="description" name="description" rows="3"></textarea>
                         </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-rounded btn-primary">تاكيد</button>
@@ -237,8 +239,8 @@
     <!-- Container closed -->
     </div>
     <!-- main-content closed -->
-
 @endsection
+
 @section('js')
     <!-- Internal Data tables -->
     <script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>

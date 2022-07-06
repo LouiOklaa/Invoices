@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    لوحة التحكم
+    لوحة التحكم - لؤي سوفت
 @endsection
 
 @section('css')
@@ -23,6 +23,7 @@
     </div>
     <!-- /breadcrumb -->
 @endsection
+
 @section('content')
     <!-- row -->
     <div class="row row-sm">
@@ -39,9 +40,9 @@
                                 <p class="mb-0 tx-12 text-white op-7">عدد الفواتير الكلي&nbsp : &nbsp {{ \App\invoices::count() }}</p>
                             </div>
                             <span class="float-right my-auto mr-auto">
-											<i class="fas fa-arrow-circle-up text-white"></i>
-											<span class="text-white op-7">100 %</span>
-										</span>
+                                <i class="fas fa-arrow-circle-up text-white"></i>
+                                <span class="text-white op-7">100 %</span>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -61,21 +62,20 @@
                                 <p class="mb-0 tx-12 text-white op-7">عدد الفواتير الكلي&nbsp : &nbsp {{ \App\invoices::where('value_status' , '=' , 2)->count() }}</p>
                             </div>
                             <span class="float-right my-auto mr-auto">
-											<i class="fas fa-arrow-circle-down text-white"></i>
-											<span class="text-white op-7">%
-                                                 @php
-                                                     $count_all= \App\Invoices::count();
-                                                     $count_invoices2 = \App\Invoices::where('value_status', 2)->count();
-                                                     if($count_invoices2 == 0){
-                                                        echo $count_invoices2 = 0;
-                                                     }
-                                                     else{
-                                                        echo round($count_invoices2 = $count_invoices2 / $count_all *100);
-                                                     }
-                                                 @endphp
-
-                                                </span>
-										</span>
+                                <i class="fas fa-arrow-circle-down text-white"></i>
+                                <span class="text-white op-7">%
+                                     @php
+                                         $count_all= \App\Invoices::count();
+                                         $count_invoices2 = \App\Invoices::where('value_status', 2)->count();
+                                         if($count_invoices2 == 0){
+                                            echo $count_invoices2 = 0;
+                                         }
+                                         else{
+                                            echo round($count_invoices2 = $count_invoices2 / $count_all *100);
+                                         }
+                                     @endphp
+                                </span>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -95,22 +95,20 @@
                                 <p class="mb-0 tx-12 text-white op-7">عدد الفواتير الكلي&nbsp : &nbsp {{ \App\invoices::where('value_status' , '=' , 1)->count() }}</p>
                             </div>
                             <span class="float-right my-auto mr-auto">
-											<i class="fas fa-arrow-circle-up text-white"></i>
-											<span class="text-white op-7">%
-
-                                             @php
-                                                 $count_all= \App\Invoices::count();
-                                                 $count_invoices1 = \App\Invoices::where('value_status', 1)->count();
-                                                 if($count_invoices1 == 0){
-                                                    echo $count_invoices1 = 0;
-                                                 }
-                                                 else{
-                                                    echo round($count_invoices1 = $count_invoices1 / $count_all *100);
-                                                 }
-                                             @endphp
-
-                                            </span>
-										</span>
+                                <i class="fas fa-arrow-circle-up text-white"></i>
+                                <span class="text-white op-7">%
+                                     @php
+                                         $count_all= \App\Invoices::count();
+                                         $count_invoices1 = \App\Invoices::where('value_status', 1)->count();
+                                         if($count_invoices1 == 0){
+                                            echo $count_invoices1 = 0;
+                                         }
+                                         else{
+                                            echo round($count_invoices1 = $count_invoices1 / $count_all *100);
+                                         }
+                                     @endphp
+                                </span>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -130,22 +128,20 @@
                                 <p class="mb-0 tx-12 text-white op-7">عدد الفواتير الكلي&nbsp : &nbsp {{ \App\invoices::where('value_status' , '=' , 3)->count() }}</p>
                             </div>
                             <span class="float-right my-auto mr-auto">
-											<i class="fas fa-arrow-circle-down text-white"></i>
-											<span class="text-white op-7">%
-
-                                             @php
-                                                 $count_all= \App\Invoices::count();
-                                                 $count_invoices1 = \App\Invoices::where('value_status', 1)->count();
-                                                 if($count_invoices1 == 0){
-                                                     echo $count_invoices1 = 0;
-                                                 }
-                                                 else{
-                                                   echo round($count_invoices1 = $count_invoices1 / $count_all *100);
-                                                 }
-                                             @endphp
-
-                                            </span>
-										</span>
+                                <i class="fas fa-arrow-circle-down text-white"></i>
+                                <span class="text-white op-7">%
+                                     @php
+                                         $count_all= \App\Invoices::count();
+                                         $count_invoices1 = \App\Invoices::where('value_status', 1)->count();
+                                         if($count_invoices1 == 0){
+                                             echo $count_invoices1 = 0;
+                                         }
+                                         else{
+                                           echo round($count_invoices1 = $count_invoices1 / $count_all *100);
+                                         }
+                                     @endphp
+                                </span>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -168,7 +164,6 @@
                 </div>
                 <div class="card-body" style="width: 70%">
                     {!! $chartjs->render() !!}
-
                 </div>
             </div>
         </div>
@@ -185,9 +180,11 @@
     </div>
     <!-- row closed -->
     </div>
+    <!-- Container closed -->
     </div>
     <!-- Container closed -->
 @endsection
+
 @section('js')
     <!--Internal  Chart.bundle js -->
     <script src="{{URL::asset('assets/plugins/chart.js/Chart.bundle.min.js')}}"></script>

@@ -1,9 +1,12 @@
 @extends('layouts.master')
+
 @section('title')
-    كل الاشعارات
+    كل الاشعارات - لؤي سوفت
 @endsection
+
 @section('css')
 @endsection
+
 @section('page-header')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
@@ -13,6 +16,7 @@
     </div>
     <!-- breadcrumb -->
 @endsection
+
 @section('content')
     <!-- row -->
         <div class="col-xl-12">
@@ -81,6 +85,7 @@
     </div>
     <!-- main-content closed -->
 @endsection
+
 @section('js')
     <!-- Moment js -->
     <script src="{{URL::asset('assets/plugins/raphael/raphael.min.js')}}"></script>

@@ -1,7 +1,9 @@
 @extends('layouts.master')
+
 @section('title')
-    الفواتير المؤرشفة
+    الفواتير المؤرشفة - لؤي سوفت
 @stop
+
 @section('css')
     <!-- Internal Data table css -->
     <link href="{{ URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
@@ -13,19 +15,19 @@
     <!--Internal   Notify -->
     <link href="{{ URL::asset('assets/plugins/notify/css/notifIt.css') }}" rel="stylesheet" />
 @endsection
+
 @section('page-header')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">الفواتير</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ أرشيف
-                    الفواتير</span>
+                <h4 class="content-title mb-0 my-auto">الفواتير</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ أرشيف الفواتير</span>
             </div>
         </div>
-
     </div>
     <!-- breadcrumb -->
 @endsection
+
 @section('content')
 
     @if (session()->has('archive'))
@@ -63,69 +65,69 @@
                     <div class="table-responsive">
                         <table id="example1" class="table key-buttons text-md-nowrap" data-page-length='50'>
                             <thead>
-                            <tr>
-                                <th class="border-bottom-0">ID</th>
-                                <th class="border-bottom-0">رقم الفاتورة</th>
-                                <th class="border-bottom-0">تاريخ الفاتورة</th>
-                                <th class="border-bottom-0">تاريخ الاستحقاق</th>
-                                <th class="border-bottom-0">المنتج</th>
-                                <th class="border-bottom-0">القسم</th>
-                                <th class="border-bottom-0">الخصم</th>
-                                <th class="border-bottom-0">نسبة الضريبة</th>
-                                <th class="border-bottom-0">قيمة الضريبة</th>
-                                <th class="border-bottom-0">الاجمالي</th>
-                                <th class="border-bottom-0">الحالة</th>
-                                <th class="border-bottom-0">ملاحظات</th>
-                                <th class="border-bottom-0">العمليات</th>
-                            </tr>
+                                <tr>
+                                    <th class="border-bottom-0">ID</th>
+                                    <th class="border-bottom-0">رقم الفاتورة</th>
+                                    <th class="border-bottom-0">تاريخ الفاتورة</th>
+                                    <th class="border-bottom-0">تاريخ الاستحقاق</th>
+                                    <th class="border-bottom-0">المنتج</th>
+                                    <th class="border-bottom-0">القسم</th>
+                                    <th class="border-bottom-0">الخصم</th>
+                                    <th class="border-bottom-0">نسبة الضريبة</th>
+                                    <th class="border-bottom-0">قيمة الضريبة</th>
+                                    <th class="border-bottom-0">الاجمالي</th>
+                                    <th class="border-bottom-0">الحالة</th>
+                                    <th class="border-bottom-0">ملاحظات</th>
+                                    <th class="border-bottom-0">العمليات</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <?php $i=0?>
-                            @foreach($invoices as $one)
-                                <?php $i ++?>
-                                <tr>
-                                    <td>{{$i}}</td>
-                                    <td>
-                                        <a href="{{ url('InvoicesDetails') }}/{{ $one->id }}">{{$one->invoice_number}}</a>
-                                    </td>
-                                    <td>{{$one->invoice_Date}}</td>
-                                    <td>{{$one->due_date}}</td>
-                                    <td>{{$one->product}}</td>
-                                    <td>{{$one->section->section_name}}</td>
-                                    <td>{{$one->discount}}</td>
-                                    <td>{{$one->rate_VAT}}</td>
-                                    <td>{{$one->value_VAT}}</td>
-                                    <td>{{$one->total}}</td>
-                                    <td>
-                                        @if ($one->value_status == 1)
-                                            <label class="badge badge-success">{{$one->status}}</label>
-                                        @elseif($one->value_status == 2)
-                                            <label class="badge badge-danger">{{$one->status}}</label>
+                                <?php $i=0?>
+                                @foreach($invoices as $one)
+                                    <?php $i ++?>
+                                    <tr>
+                                        <td>{{$i}}</td>
+                                        <td>
+                                            <a href="{{ url('InvoicesDetails') }}/{{ $one->id }}">{{$one->invoice_number}}</a>
+                                        </td>
+                                        <td>{{$one->invoice_Date}}</td>
+                                        <td>{{$one->due_date}}</td>
+                                        <td>{{$one->product}}</td>
+                                        <td>{{$one->section->section_name}}</td>
+                                        <td>{{$one->discount}}</td>
+                                        <td>{{$one->rate_VAT}}</td>
+                                        <td>{{$one->value_VAT}}</td>
+                                        <td>{{$one->total}}</td>
+                                        <td>
+                                            @if ($one->value_status == 1)
+                                                <label class="badge badge-success">{{$one->status}}</label>
+                                            @elseif($one->value_status == 2)
+                                                <label class="badge badge-danger">{{$one->status}}</label>
+                                            @else
+                                                <label class="badge badge-warning" style="color: white;">{{$one->status}}</label>
+                                            @endif
+                                        </td>
+                                        @if($one->note == NULL)
+                                            <td style="text-align: center; color: #BEC1C8">---</td>
                                         @else
-                                            <label class="badge badge-warning" style="color: white;">{{$one->status}}</label>
+                                            <td style="text-align: center">{{$one->note}}</td>
                                         @endif
-                                    </td>
-                                    @if($one->note == NULL)
-                                        <td style="text-align: center; color: #BEC1C8">---</td>
-                                    @else
-                                        <td style="text-align: center">{{$one->note}}</td>
-                                    @endif
-                                    <td>
-                                        <div class="dropdown ">
-                                            <button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-rounded btn-sm btn-primary"
-                                                    data-toggle="dropdown" id="dropdownMenuButton" type="button">&nbsp العمليات &nbsp<i class="fas fa-caret-down ml-1"></i></button>
-                                            <div  class="dropdown-menu tx-10">
-                                                @can('استعادة الفاتورة')
-                                                   <a class="dropdown-item bg-primary text-white" href="#" data-toggle="modal" data-target="#transfer_invoice" data-invoice_id="{{$one->id}}" data-invoice_number="{{$one->invoice_number}}">نقل الى قائمة الفواتير</a>
-                                                @endcan
-                                                @can('حذف فاتورة مؤرشفة')
-                                                    <a class="dropdown-item bg-primary text-white" href="#" data-toggle="modal" data-target="#delete_invoice" data-invoice_id="{{$one->id}}" data-invoice_number="{{$one->invoice_number}}">حذف الفاتورة</a>
-                                                @endcan
+                                        <td>
+                                            <div class="dropdown ">
+                                                <button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-rounded btn-sm btn-primary"
+                                                        data-toggle="dropdown" id="dropdownMenuButton" type="button">&nbsp العمليات &nbsp<i class="fas fa-caret-down ml-1"></i></button>
+                                                <div  class="dropdown-menu tx-10">
+                                                    @can('استعادة الفاتورة')
+                                                       <a class="dropdown-item bg-primary text-white" href="#" data-toggle="modal" data-target="#transfer_invoice" data-invoice_id="{{$one->id}}" data-invoice_number="{{$one->invoice_number}}">نقل الى قائمة الفواتير</a>
+                                                    @endcan
+                                                    @can('حذف فاتورة مؤرشفة')
+                                                        <a class="dropdown-item bg-primary text-white" href="#" data-toggle="modal" data-target="#delete_invoice" data-invoice_id="{{$one->id}}" data-invoice_number="{{$one->invoice_number}}">حذف الفاتورة</a>
+                                                    @endcan
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -200,8 +202,8 @@
     <!-- Container closed -->
     </div>
     <!-- main-content closed -->
-
 @endsection
+
 @section('js')
     <!-- Internal Data tables -->
     <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
@@ -225,7 +227,7 @@
     <!--Internal  Notify js -->
     <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
-
+    <!-- Delete Modal Script -->
     <script>
         $('#delete_invoice').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
@@ -236,7 +238,7 @@
             modal.find('.modal-body #invoice_number').val(invoice_number);
         })
     </script>
-
+    <!--Restore Modal Script -->
     <script>
         $('#transfer_invoice').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)

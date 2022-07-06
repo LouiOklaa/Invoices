@@ -44,10 +44,11 @@ class AddInvoice extends Notification
     {
         $url = 'http://localhost:8000/InvoicesDetails/'.$this->InvoiceID;
         return (new MailMessage)
+                    ->greeting('!مرحبا')
                     ->subject('اضافة فاتورة جديدة')
-                    ->line('اضافة فاتورة جديدة')
+                    ->line('تمت اضافة فاتورة جديدة')
                     ->action('عرض الفاتورة', $url)
-                    ->line('شكرا لاستخدامك مورا سوفت لادارة الفواتير');
+                    ->salutation('شكرا لاستخدامك لؤي سوفت لادارة الفواتير');
     }
 
     /**

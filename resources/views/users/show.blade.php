@@ -1,9 +1,12 @@
 @extends('layouts.master')
+
 @section('title')
-    معلومات المستخدم
+    معلومات المستخدم - لؤي سوفت
 @endsection
+
 @section('css')
 @endsection
+
 @section('page-header')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
@@ -34,35 +37,13 @@
                                 <div>
                                     <h5 class="main-profile-name">{{$user->name}}</h5>
                                     <p class="main-profile-name-text">
-                                    <?php $i=0?>
-                                    @if(!empty($user->getRoleNames()))
-                                            @foreach($user->getRoleNames() as $v)
-                                                @if($i==0)
-                                                    &nbsp{{ $v }}&nbsp
-                                                    <?php $i ++?>
-                                                @else
-                                                    &&nbsp{{ $v }}&nbsp
-                                                @endif
-                                            @endforeach
-                                        @else
-                                    @endif
+                                        {{$user->role_name}}
                                     </p>
                                 </div>
                             </div>
                             <h6>الوصف</h6>
                             <div class="main-profile-bio text-muted">
-                                يعمل بصلاحية <?php $i=0?>
-                                @if(!empty($user->getRoleNames()))
-                                    @foreach($user->getRoleNames() as $v)
-                                        @if($i==0)
-                                            &nbsp{{ $v }}&nbsp
-                                            <?php $i ++?>
-                                        @else
-                                            &&nbsp{{ $v }}&nbsp
-                                        @endif
-                                    @endforeach
-                                @else
-                                @endif لدى لؤي - سوفت لادارة الفواتير
+                                يعمل بصلاحية {{$user->role_name}} لدى لؤي - سوفت لادارة الفواتير
                             </div><!-- main-profile-bio -->
                             <label class="main-content-label tx-13 mg-b-20">مواقع التواصل الاجتماعي</label>
                             <div class="main-profile-social-list">
@@ -229,7 +210,7 @@
                                     <div class="col">
                                         <div class="text-right">
                                             <h5 class="tx-13">صلاحيات تم منحها</h5>
-                                            <h2 class="mb-0 tx-22 mb-1 mt-1">{{number_format(\Spatie\Permission\Models\Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")->where("role_has_permissions.role_id",$user->id)->count())}}</h2>
+                                            <h2 class="mb-0 tx-22 mb-1 mt-1">{{number_format(\Spatie\Permission\Models\Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")->where("role_has_permissions.role_id",\Spatie\Permission\Models\Role::where('name' , '=' , $user->role_name)->pluck('id'))->count())}}</h2>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -253,5 +234,6 @@
     </div>
     <!-- main-content closed -->
 @endsection
+
 @section('js')
 @endsection

@@ -1,4 +1,9 @@
 @extends('layouts.master')
+
+@section('title')
+    تقارير الفواتير - لؤي سوفت
+@stop
+
 @section('css')
     <!-- Internal Data table css -->
     <link href="{{ URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
@@ -7,24 +12,18 @@
     <link href="{{ URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
-
     <!-- Internal Spectrum-colorpicker css -->
     <link href="{{ URL::asset('assets/plugins/spectrum-colorpicker/spectrum.css') }}" rel="stylesheet">
-
     <!-- Internal Select2 css -->
     <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
-
-@section('title')
-    تقارير الفواتير - لؤي سوفت لادارة الفواتير
-@stop
 @endsection
+
 @section('page-header')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">التقارير</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ تقارير
-                الفواتير</span>
+                <h4 class="content-title mb-0 my-auto">التقارير</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ تقارير الفواتير</span>
             </div>
         </div>
     </div>
@@ -48,41 +47,32 @@
 
     <!-- row -->
     <div class="row">
-
         <div class="col-xl-12">
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
                     <form action="/Search_Invoices" method="POST" role="search" autocomplete="off">
                         {{ csrf_field() }}
 
-
                         <div class="col-lg-3">
                             <label class="rdiobox">
-                                <input checked name="radio" type="radio" value="1" id="type_div"> <span>البحث من خلال نوع
-                                الفاتورة</span></label>
+                                <input checked name="radio" type="radio" value="1" id="type_div"> <span>البحث من خلال نوع الفاتورة</span>
+                            </label>
                         </div>
 
-
                         <div class="col-lg-3 mg-t-20 mg-lg-t-0">
-                            <label class="rdiobox"><input name="radio" value="2" type="radio"><span>البحث من خلال رقم الفاتورة
-                            </span></label>
+                            <label class="rdiobox"><input name="radio" value="2" type="radio"><span>البحث من خلال رقم الفاتورة</span></label>
                         </div><br><br>
 
                         <div class="row">
-
                             <div class="col-lg-3 mg-t-20 mg-lg-t-0" id="invoices_type">
-                                <p class="mg-b-10">تحديد نوع الفواتير</p><select class="form-control select2" name="invoices_type"
-                                                                                 required>
-                                    <option value="{{ $invoices_type ?? 'حدد نوع الفواتير' }}" selected>
-                                        {{ $invoices_type ?? 'حدد نوع الفواتير' }}
-                                    </option>
+                                <p class="mg-b-10">تحديد نوع الفواتير</p><select class="form-control select2" name="invoices_type" required>
+                                    <option value="{{ $invoices_type ?? 'حدد نوع الفواتير' }}" selected>{{ $invoices_type ?? 'حدد نوع الفواتير' }}</option>
                                     <option value="كل الفواتير">كل الفواتير</option>
                                     <option value="مدفوعة">الفواتير المدفوعة</option>
                                     <option value="غير مدفوعة">الفواتير الغير مدفوعة</option>
                                     <option value="مدفوعة جزئيا">الفواتير المدفوعة جزئيا</option>
                                 </select>
                             </div><!-- col-4 -->
-
 
                             <div class="col-lg-3 mg-t-20 mg-lg-t-0" id="invoice_number">
                                 <p class="mg-b-10">البحث برقم الفاتورة</p>
@@ -121,70 +111,69 @@
                             </div>
                         </div>
                     </form>
-
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         @if (isset($details))
                             <table id="example1" class="table key-buttons text-md-nowrap" data-page-length='50' style=" text-align: center">
                                 <thead>
-                                <tr>
-                                    <th class="border-bottom-0">ID</th>
-                                    <th class="border-bottom-0">رقم الفاتورة</th>
-                                    <th class="border-bottom-0">تاريخ الفاتورة</th>
-                                    <th class="border-bottom-0">تاريخ الاستحقاق</th>
-                                    <th class="border-bottom-0">المنتج</th>
-                                    <th class="border-bottom-0">القسم</th>
-                                    <th class="border-bottom-0">الخصم</th>
-                                    <th class="border-bottom-0">نسبة الضريبة</th>
-                                    <th class="border-bottom-0">قيمة الضريبة</th>
-                                    <th class="border-bottom-0">الاجمالي</th>
-                                    <th class="border-bottom-0">الحالة</th>
-                                    <th class="border-bottom-0">ملاحظات</th>
-                                </tr>
+                                    <tr>
+                                        <th class="border-bottom-0">ID</th>
+                                        <th class="border-bottom-0">رقم الفاتورة</th>
+                                        <th class="border-bottom-0">تاريخ الفاتورة</th>
+                                        <th class="border-bottom-0">تاريخ الاستحقاق</th>
+                                        <th class="border-bottom-0">المنتج</th>
+                                        <th class="border-bottom-0">القسم</th>
+                                        <th class="border-bottom-0">الخصم</th>
+                                        <th class="border-bottom-0">نسبة الضريبة</th>
+                                        <th class="border-bottom-0">قيمة الضريبة</th>
+                                        <th class="border-bottom-0">الاجمالي</th>
+                                        <th class="border-bottom-0">الحالة</th>
+                                        <th class="border-bottom-0">ملاحظات</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <?php $i=0?>
-                                @foreach($details as $one)
-                                    <?php $i ++?>
-                                    <tr>
-                                        <td>{{$i}}</td>
-                                        <td>
-                                            <a href="{{ url('InvoicesDetails') }}/{{ $one->id }}">{{$one->invoice_number}}</a>
-                                        </td>
-                                        <td>{{$one->invoice_Date}}</td>
-                                        <td>{{$one->due_date}}</td>
-                                        <td>{{$one->product}}</td>
-                                        <td>{{$one->section->section_name}}</td>
-                                        <td>{{$one->discount}}</td>
-                                        <td>{{$one->rate_VAT}}</td>
-                                        <td>{{$one->value_VAT}}</td>
-                                        <td>{{$one->total}}</td>
-                                        <td>
-                                            @if ($one->value_status == 1)
-                                                <label class="badge badge-success">{{$one->status}}</label>
-                                                @if($one->deleted_at)
-                                                    <label class="badge badge-dark">مؤرشفة</label>
+                                    <?php $i=0?>
+                                    @foreach($details as $one)
+                                        <?php $i ++?>
+                                        <tr>
+                                            <td>{{$i}}</td>
+                                            <td>
+                                                <a href="{{ url('InvoicesDetails') }}/{{ $one->id }}">{{$one->invoice_number}}</a>
+                                            </td>
+                                            <td>{{$one->invoice_Date}}</td>
+                                            <td>{{$one->due_date}}</td>
+                                            <td>{{$one->product}}</td>
+                                            <td>{{$one->section->section_name}}</td>
+                                            <td>{{$one->discount}}</td>
+                                            <td>{{$one->rate_VAT}}</td>
+                                            <td>{{$one->value_VAT}}</td>
+                                            <td>{{$one->total}}</td>
+                                            <td>
+                                                @if ($one->value_status == 1)
+                                                    <label class="badge badge-success">{{$one->status}}</label>
+                                                    @if($one->deleted_at)
+                                                        <label class="badge badge-dark">مؤرشفة</label>
+                                                    @endif
+                                                @elseif($one->value_status == 2)
+                                                    <label class="badge badge-danger">{{$one->status}}</label>
+                                                    @if($one->deleted_at)
+                                                        <label class="badge badge-dark">مؤرشفة</label>
+                                                    @endif
+                                                @else
+                                                    <label class="badge badge-warning" style="color: white;">{{$one->status}}</label>
+                                                    @if($one->deleted_at)
+                                                        <label class="badge badge-dark">مؤرشفة</label>
+                                                    @endif
                                                 @endif
-                                            @elseif($one->value_status == 2)
-                                                <label class="badge badge-danger">{{$one->status}}</label>
-                                                @if($one->deleted_at)
-                                                    <label class="badge badge-dark">مؤرشفة</label>
-                                                @endif
+                                            </td>
+                                            @if($one->note == NULL)
+                                                <td style="text-align: center; color: #BEC1C8">---</td>
                                             @else
-                                                <label class="badge badge-warning" style="color: white;">{{$one->status}}</label>
-                                                @if($one->deleted_at)
-                                                    <label class="badge badge-dark">مؤرشفة</label>
-                                                @endif
+                                                <td style="text-align: center">{{$one->note}}</td>
                                             @endif
-                                        </td>
-                                        @if($one->note == NULL)
-                                            <td style="text-align: center; color: #BEC1C8">---</td>
-                                        @else
-                                            <td style="text-align: center">{{$one->note}}</td>
-                                        @endif
-                                    </tr>
-                                @endforeach
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         @endif
@@ -199,6 +188,7 @@
     </div>
     <!-- main-content closed -->
 @endsection
+
 @section('js')
     <!-- Internal Data tables -->
     <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
@@ -243,7 +233,6 @@
             dateFormat: 'yy-mm-dd'
         }).val();
     </script>
-
     <script>
         $(document).ready(function() {
             $('#invoice_number').hide();
@@ -262,6 +251,4 @@
             });
         });
     </script>
-
-
 @endsection

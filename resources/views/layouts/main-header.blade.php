@@ -82,7 +82,7 @@
 									   <a class="dropdown-item" href="{{route('All_Notifications')}}"><i class="bx bx-envelope"></i>الاشعارات</a>
                                     @endcan
                                     @can('عرض صلاحية')
-									   <a class="dropdown-item" href="{{ route('roles.show', Auth::user()->id) }}"><i class="bx bx-slider-alt"></i> صلاحيات الحساب</a>
+									   <a class="dropdown-item" href="{{ route('roles.show', \Spatie\Permission\Models\Role::where('name' , '=' , Auth::user()->role_name)->first()) }}"><i class="bx bx-slider-alt"></i> صلاحيات الحساب</a>
                                     @endcan
                                     <a class="dropdown-item" href="{{ route('logout') }}"onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="bx bx-log-out"></i>تسجيل خروج</a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

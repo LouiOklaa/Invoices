@@ -62,7 +62,9 @@ class PermissionTableSeeder extends Seeder
 
             'الاشعارات',
         ];
+
         foreach ($permissions as $permission) {
+
             Permission::create(['name' => $permission]);
         }
     }

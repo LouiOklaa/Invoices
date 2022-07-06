@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Products;
 use App\Sections;
 use Illuminate\Http\Request;
-use function GuzzleHttp\Promise\all;
 
 class ProductsController extends Controller
 {
@@ -147,7 +146,6 @@ class ProductsController extends Controller
 
         session()->flash('Delete','تم حذف المنتج بنجاح');
         return back();
-
 
     }
 }
