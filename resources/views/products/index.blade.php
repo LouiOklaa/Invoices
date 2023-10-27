@@ -164,12 +164,12 @@
     </div>
     {{--  End Add Modal  --}}
 
-    {{--  Start Edit Modal  --}}
+        {{--  Start Edit Modal  --}}
     <div class="modal fade" id="edit_modal">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content modal-content-demo">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">تعديل منتج</h5>
+                    <h5 class="modal-title">تعديل المنتج</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -178,23 +178,22 @@
                     <form action="products/update" method="post" autocomplete="off">
                         {{method_field('patch')}}
                         {{csrf_field()}}
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">اسم المنتج</label>
-                                <input type="hidden" class="form-control" id="product_id" name="product_id">
-                                <input type="text" class="form-control" id="product_name" name="product_name">
-                            </div>
-                            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">القسم</label>
-                            <select name="section_name" id="section_name" class="form-control select2">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">اسم المنتج:</label>
+                            <input type="hidden" class="form-control" id="product_id" name="product_id">
+                            <input type="text" class="form-control" id="product_name" name="product_name">
+                        </div>
+                        <div class="form-group">
+                            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">القسم:</label>
+                            <select name="section_name" id="section_name" class="form-control" required>
                                 @foreach ($sections as $one)
                                     <option> {{$one->section_name}} </option>
                                 @endforeach
-                            </select><br>
-                            <div class="form-group">
-                                <label for="exampleFormControlTextarea1">ملاحظات</label>
-                                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
-                            </div>
-
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">ملاحظات:</label>
+                            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-rounded btn-primary">تاكيد</button>
