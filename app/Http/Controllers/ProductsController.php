@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Products;
 use App\Sections;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ProductsController extends Controller
 {
@@ -54,12 +55,16 @@ class ProductsController extends Controller
 
         $validatedData=$request->validate([
 
-            'product_name' => 'required|max:255',
+            'product_name' => ['required', 'max:255', Rule::unique('products')
+                ->where(function ($query) use ($request) {
+                return $query->where('product_name', $request->product_name)->where('section_id', $request->section_id);
+            })],
             'section_id' => 'required',
-
         ],[
 
             'product_name.required' => 'يرجي ادخال اسم المنتج',
+            'product_name.unique' =>  'اسم المنتج موجود بهذا القسم مسبقا',
+            'product_name.max' =>  'الحد الأقصى لمحارف اسم المنتج : 255',
             'section_id.required' => 'يرجى تحديد القسم'
 
         ]);
@@ -112,22 +117,38 @@ class ProductsController extends Controller
 
         $products = Products::findOrFail($request->product_id);
 
-        $this->validate($request, [
+        if ($products->product_name == $request->product_name && $products->section_id == $id ){
 
-            'product_name' => 'required|max:255',
-            'section_name' => 'required',
-        ],[
+            $products->update([
+                'product_name' => $request->product_name,
+                'section_id' => $id,
+                'description' => $request->description,
+            ]);
+        }
 
-            'product_name.required' =>'يرجي ادخال اسم المنتج',
-            'section_name.required' => 'يرجى تحديد القسم',
+        else {
+            $this->validate($request, [
 
-        ]);
+                'product_name' => ['required', 'max:255', Rule::unique('products')
+                        ->where(function ($query) use ($request , $id) {
+                            return $query->where('product_name', $request->product_name)->where('section_id', $id);
+                        })],
+                'section_name' => 'required',
+            ], [
 
-        $products->update([
-            'product_name' => $request->product_name,
-            'section_id' => $id,
-            'description' => $request->description,
-        ]);
+                'product_name.required' => 'يرجي ادخال اسم المنتج',
+                'product_name.unique' => 'اسم المنتج موجود بهذا القسم مسبقا',
+                'product_name.max' => 'الحد الأقصى لمحارف اسم المنتج : 255',
+                'section_name.required' => 'يرجى تحديد القسم',
+
+            ]);
+
+            $products->update([
+                'product_name' => $request->product_name,
+                'section_id' => $id,
+                'description' => $request->description,
+            ]);
+        }
 
         session()->flash('Edit','تم تعديل المنتج بنجاج');
         return back();
