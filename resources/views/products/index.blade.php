@@ -164,7 +164,7 @@
     </div>
     {{--  End Add Modal  --}}
 
-    {{--  Start Edit Modal  --}}
+        {{--  Start Edit Modal  --}}
     <div class="modal fade" id="edit_modal">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content modal-content-demo">
