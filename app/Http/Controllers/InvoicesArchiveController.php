@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Invoices;
+use App\Invoices_Attachments;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class InvoicesArchiveController extends Controller
 {
@@ -100,6 +102,11 @@ class InvoicesArchiveController extends Controller
     {
 
         $invoices = invoices::withTrashed()->where('id',$request->invoice_id)->first();
+        $details = Invoices_Attachments::where('invoice_id', $request->invoice_id)->first();
+        if (!empty($details->invoice_number)) {
+
+            Storage::disk('public_uploads')->deleteDirectory($details->invoice_number);
+        }
         $invoices->forceDelete();
         session()->flash('delete' , 'تم حذف الفاتورة بنجاح');
         return redirect('/Invoices_Archive');
