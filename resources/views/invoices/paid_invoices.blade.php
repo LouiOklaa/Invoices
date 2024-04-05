@@ -121,15 +121,7 @@
                                         <td>{{$one->rate_VAT}}</td>
                                         <td>{{$one->value_VAT}}</td>
                                         <td>{{$one->total}}</td>
-                                        <td>
-                                            @if ($one->value_status == 1)
-                                                <label class="badge badge-success">{{$one->status}}</label>
-                                            @elseif($one->value_status == 2)
-                                                <label class="badge badge-danger">{{$one->status}}</label>
-                                            @else
-                                                <label class="badge badge-warning">{{$one->status}}</label>
-                                            @endif
-                                        </td>
+                                        <td><label class="badge badge-success">{{$one->status}}</label></td>
                                         @if($one->note == NULL)
                                             <td style="text-align: center; color: #BEC1C8">---</td>
                                         @else
