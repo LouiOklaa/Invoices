@@ -123,6 +123,9 @@
                                                     @can('حذف فاتورة مؤرشفة')
                                                         <a class="dropdown-item bg-primary text-white" href="#" data-toggle="modal" data-target="#delete_invoice" data-invoice_id="{{$one->id}}" data-invoice_number="{{$one->invoice_number}}">حذف الفاتورة</a>
                                                     @endcan
+                                                    @can('طباعةالفاتورة')
+                                                        <a class="dropdown-item bg-primary text-white" href="Print_Invoice/{{ $one->id }}">طباعة الفاتورة</a>
+                                                    @endcan
                                                 </div>
                                             </div>
                                         </td>

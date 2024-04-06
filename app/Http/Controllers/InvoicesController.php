@@ -391,7 +391,7 @@ class InvoicesController extends Controller
 
     public function print_invoice ($id){
 
-        $invoices = Invoices::where('id' , $id)->first();
+        $invoices = Invoices::where('id' , $id)->withTrashed()->first();
         return view('invoices.print_invoice' , compact('invoices'));
 
     }
