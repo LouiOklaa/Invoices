@@ -111,7 +111,7 @@
                                     <tr>
                                         <td>{{$i}}</td>
                                         <td>
-                                            <a href="{{ url('InvoicesDetails') }}/{{ $one->id }}">{{$one->invoice_number}}</a>
+                                            <a @can('عرض تفاصيل فاتورة') href="{{ url('InvoicesDetails') }}/{{ $one->id }}" @endcan">{{$one->invoice_number}}</a>
                                         </td>
                                         <td>{{$one->invoice_Date}}</td>
                                         <td>{{$one->due_date}}</td>
