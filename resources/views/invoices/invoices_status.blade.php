@@ -124,6 +124,7 @@
                                     <option selected="true" disabled="disabled">حدد حالة الدفع</option>
                                     <option value="مدفوعة">مدفوعة</option>
                                     <option value="مدفوعة جزئيا">مدفوعة جزئيا</option>
+                                    <option value="غير مدفوعة">غير مدفوعة</option>
                                 </select>
                             </div>
 

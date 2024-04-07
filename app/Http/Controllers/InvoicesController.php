@@ -337,7 +337,7 @@ class InvoicesController extends Controller
 
         }
 
-        else {
+        elseif ($request->status == 'مدفوعة جزئيا') {
 
             $invoice->update([
 
@@ -355,6 +355,31 @@ class InvoicesController extends Controller
                 'section' => $request->section,
                 'status' => $request->status,
                 'value_status' => 3,
+                'note' => $request->note,
+                'payment_date' => $request->payment_date,
+                'user' => (Auth::user()->name)
+
+            ]);
+
+        }
+        else{
+
+            $invoice->update([
+
+                'status' => $request->status,
+                'value_status' => 2,
+                'payment_date' => $request->payment_date,
+
+            ]);
+
+            Invoices_Details::create([
+
+                'invoice_number' => $request->invoice_number,
+                'invoice_id' => $request->invoice_id,
+                'product' => $request->product,
+                'section' => $request->section,
+                'status' => $request->status,
+                'value_status' => 2,
                 'note' => $request->note,
                 'payment_date' => $request->payment_date,
                 'user' => (Auth::user()->name)
