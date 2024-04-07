@@ -27,6 +27,16 @@ class CustomersReportsController extends Controller
 
     public function search_customers (Request $request){
 
+        $this->validate($request, [
+
+            'section' => 'required',
+            'product' => 'required'
+        ],[
+
+            'section.required' =>'يرجى اختيار القسم',
+            'product.required' =>'يرجى اختيار المنتج'
+        ]);
+
         $section = $request->section;
         $product = $request->product;
         $start_at = date($request->start_at);
