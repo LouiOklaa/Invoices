@@ -114,9 +114,11 @@
                                             @can('تعديل مستخدم')
                                                 <a class="btn btn-rounded btn-sm btn btn-info" href="{{ route('users.edit', $user->id) }}" title="تعديل">تعديل</a>
                                             @endcan
-                                            @can('حذف مستخدم')
-                                                <button class="btn btn-rounded btn-sm btn btn-danger" data-user_id="{{ $user->id }}" data-username="{{ $user->name }}" href="#delete_modal" data-toggle="modal">حذف</button>
-                                            @endcan
+                                            @if ($user->role_name !== 'Owner')
+                                                @can('حذف مستخدم')
+                                                    <button class="btn btn-rounded btn-sm btn btn-danger" data-user_id="{{ $user->id }}" data-username="{{ $user->name }}" href="#delete_modal" data-toggle="modal">حذف</button>
+                                                @endcan
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

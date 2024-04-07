@@ -89,12 +89,12 @@
                                                    href="{{ route('roles.show', $role->id) }}">عرض</a>
                                             @endcan
 
-                                            @can('تعديل صلاحية')
-                                                <a class="btn btn-rounded btn-info btn-sm"
-                                                   href="{{ route('roles.edit', $role->id) }}">تعديل</a>
-                                            @endcan
-
                                             @if ($role->name !== 'Owner')
+                                                @can('تعديل صلاحية')
+                                                    <a class="btn btn-rounded btn-info btn-sm"
+                                                       href="{{ route('roles.edit', $role->id) }}">تعديل</a>
+                                                @endcan
+
                                                 @can('حذف صلاحية')
                                                     <button class="btn btn-rounded btn-sm btn btn-danger" data-role_id="{{ $role->id }}" title="حذف" data-role_name="{{ $role->name }}" href="#delete_modal" data-toggle="modal">حذف</button>
                                                 @endcan

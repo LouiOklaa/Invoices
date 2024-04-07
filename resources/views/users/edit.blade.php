@@ -71,20 +71,28 @@
                     <div class="row mg-b-20">
                         <div class="col-md-6 mg-t-20 mg-md-t-0">
                             <label class="form-label">حالة المستخدم</label>
-                            <select name="status" id="select-beast" class="form-control  nice-select  custom-select">
-                                <option value="{{ $user->status}}">{{ $user->status}}</option>
-                                @if($user->status == "غير مفعل")
-                                <option value="مفعل">مفعل</option>
-                                @else
-                                <option value="غير مفعل">غير مفعل</option>
-                                @endif
-                            </select>
+                            @if ($user->role_name !== 'Owner')
+                                <select name="status" id="select-beast" class="form-control  nice-select  custom-select">
+                                    <option value="{{ $user->status}}">{{ $user->status}}</option>
+                                        @if($user->status == "غير مفعل")
+                                        <option value="مفعل">مفعل</option>
+                                        @else
+                                        <option value="غير مفعل">غير مفعل</option>
+                                        @endif
+                                </select>
+                            @else
+                                {!! Form::text('status', null, array('class' => 'form-control nice-select  custom-select disabled')) !!}
+                            @endif
                         </div>
 
                         <div class="col-md-6 mg-t-20 mg-md-t-0">
                             <div class="form-group">
                                 <label class="form-label">نوع المستخدم</label>
-                              {!! Form::select('role_name', $roles ,$userRole, array('class' => 'form-control nice-select  custom-select'))!!}
+                                @if ($user->role_name !== 'Owner')
+                                 {!! Form::select('role_name', $roles ,$userRole, array('class' => 'form-control nice-select  custom-select'))!!}
+                                @else
+                                 {!! Form::select('role_name', $roles ,$userRole, array('class' => 'form-control nice-select  custom-select disabled'))!!}
+                                @endif
                             </div>
                         </div>
                     </div>
